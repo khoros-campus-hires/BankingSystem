@@ -3,11 +3,15 @@ package com.example.Banking.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.GenerationType;
 @Entity
 @Table(name = "accountdetails")
 public class Account {
 
+    private int id;
     private long AccountNumber;
     private String AccountType;
     private String BankName;
@@ -24,6 +28,18 @@ public class Account {
         BranchName = branchName;
         AccountBalance = accountBalance;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
 
     @Column(name = "AccountNumber",nullable = false)
     public long getAccountNumber()
