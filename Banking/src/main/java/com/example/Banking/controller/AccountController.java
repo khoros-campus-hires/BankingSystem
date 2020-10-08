@@ -24,7 +24,7 @@ public class AccountController {
         return accountRepository.save(account);
     }
 
-    @DeleteMapping("/getAccountDetails/{AccountNumber}")
+    @DeleteMapping("/deleteAccountDetails/{AccountNumber}")
     public void deleteAccountDetails(@PathVariable(value = "AccountNumber") Long AcNumber){
         accountRepository.deleteById(AcNumber);
     }
