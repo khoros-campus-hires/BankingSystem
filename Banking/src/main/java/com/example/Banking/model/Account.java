@@ -28,6 +28,8 @@ public class Account {
         BranchName = branchName;
         AccountBalance = accountBalance;
     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 
     public int getId() {
         return id;
@@ -37,11 +39,9 @@ public class Account {
         this.id = id;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
 
 
-    @Column(name = "AccountNumber",nullable = false)
+    @Column(name = "Account_Number",nullable = false)
     public long getAccountNumber()
     {
         return AccountNumber;
@@ -51,7 +51,7 @@ public class Account {
         AccountNumber = accountNumber;
     }
 
-    @Column(name = "AccountType",nullable = false)
+    @Column(name = "Account_Type",nullable = false)
     public String getAccountType()
     {
         return AccountType;
@@ -61,7 +61,7 @@ public class Account {
         AccountType = accountType;
     }
 
-    @Column(name = "BankName",nullable = false)
+    @Column(name = "Bank_Name",nullable = false)
     public String getBankName()
     {
         return BankName;
@@ -70,7 +70,7 @@ public class Account {
         BankName = bankName;
     }
 
-    @Column(name = "BranchName",nullable = false)
+    @Column(name = "Branch_Name",nullable = false)
     public String getBranchName() {
         return BranchName;
     }
@@ -81,7 +81,7 @@ public class Account {
         BranchName = branchName;
     }
 
-    @Column(name = "AccountBalance",nullable = false)
+    @Column(name = "Account_Balance",nullable = false)
     public long getAccountBalance()
     {
         return AccountBalance;
