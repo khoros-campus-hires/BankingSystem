@@ -1,13 +1,13 @@
 package com.example.Banking.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 
 import com.example.Banking.Exception.ResourceNotFoundException;
 import com.example.Banking.Model.User;
 import com.example.Banking.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 //import javax.validation.Valid;
@@ -22,6 +22,11 @@ public class UserController {
     @GetMapping("/GetAllUsers")
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @GetMapping("/GetOneUser/{id}")
+    public Optional<User> getOneUser(@PathVariable(value = "id") Long userId) {
+        return userRepository.findById(userId);
     }
 
     @PostMapping("/CreateUser")
@@ -40,8 +45,12 @@ public class UserController {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
 
-        user.setM_no(userDetails.getM_no());
         user.setfirstName(userDetails.getfirstName());
+        user.setlastName(userDetails.getlastName());
+        user.setAge(userDetails.getAge());
+        user.setAddress(userDetails.getAddress());
+        user.setContact_number(userDetails.getContact_number());
+        user.setEmail((userDetails.getEmail()));
         userRepository.save(user);
     }
 }
