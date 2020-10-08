@@ -1,6 +1,5 @@
 package com.example.Banking.Model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,50 +8,54 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "Useeee")
 public class User {
+        private long id;
+        private String firstName;
+        private int m_no;
 
-    private long Id;
-    private String FirstName;
-    private int Age;
+        public User() {
 
-    public User() {
+        }
 
-    }
+        public User(String firstName, int m_no) {
+            this.firstName = firstName;
+            this.m_no= m_no;
+        }
 
-    public User(String FirstName, int Age) {
-        this.FirstName = FirstName;
-        this.Age= Age;
-    }
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        public long getId() {
+            return id;
+        }
+        public void setId(long id) {
+            this.id = id;
+        }
 
-    @Column(name = "Id", nullable = false)
-    public long getId() {
-        return Id;
-    }
-    public void setId(long Id) {
-        this.Id = Id;
-    }
+        @Column(name = "first_name", nullable = false)
+        public String getfirstName() {
+            return firstName;
+        }
+        public void setfirstName(String firstName) {
+            this.firstName = firstName;
+        }
 
-    @Column(name = "FirstName", nullable = false)
-    public String getFirstName() {
-        return FirstName;
-    }
-    public void setFirstName(String FirstName) {
-        this.FirstName = FirstName;
-    }
+        @Column(name = "m_no", nullable = false)
+        public int getM_no() {
+            return m_no;
+        }
+        public void setM_no(int m_no) {
+            this.m_no = m_no;
+        }
 
-    @Column(name = "Age", nullable = false)
-    public int getAge() {
-        return Age;
-    }
-    public void setAge(int Age) {
-        this.Age = Age;
-    }
+        @Override
+        public String toString() {
+            return "User [id=" + id + ", firstName=" + firstName + ", m_no=" + m_no + "]";
+        }
 
-    @Override
-    public String toString() {
-        return "User [Id=" + Id + ", FirstName=" + FirstName + ", Age=" + Age + "]";
-    }
+
+
+
 
 }
 
