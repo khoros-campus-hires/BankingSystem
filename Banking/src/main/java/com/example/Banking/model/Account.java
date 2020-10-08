@@ -3,7 +3,7 @@ package com.example.Banking.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
+import javax.persistence.GenerationType;
 @Entity
 @Table(name = "accountdetails")
 public class Account {
