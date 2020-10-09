@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Date;
 
 @Entity
 @Table(name = "Users")
@@ -13,18 +14,21 @@ public class User {
         private long id;
         private String firstName;
         private String lastName;
+        private Date dob;
         private int age;
         private String address;
         private long contact_number;
         private String email;
 
+
         public User() {
 
         }
 
-        public User(String firstName, String lastName, int age, String address, long contact_number,String email) {
+        public User(String firstName, String lastName, Date dob, int age, String address, long contact_number,String email) {
             this.firstName = firstName;
             this.lastName = lastName;
+            this.dob=dob;
             this.age = age;
             this.address=address;
             this.contact_number = contact_number;
@@ -57,6 +61,10 @@ public class User {
         this.lastName = lastName;
     }
 
+        @Column(name="dob", nullable = false)
+        public Date getDob() { return dob;}
+        public void setDob(Date dob) { this.dob = dob; }
+
         @Column(name = "age", nullable = false)
         public int getAge() {
             return age;
@@ -87,8 +95,8 @@ public class User {
 
         @Override
         public String toString() {
-            return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ",  age=" + age + ",/n"
-            +"address=" + address +", contact_number=" + contact_number + ", email=" +email + "]";
+            return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", Date of Birth=" + dob +", /n" +
+                    "age=" + age + "address=" + address +", contact_number=" + contact_number + ", email=" +email + "]";
         }
 
 
