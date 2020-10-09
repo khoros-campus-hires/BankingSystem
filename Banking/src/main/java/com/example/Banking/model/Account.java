@@ -11,7 +11,7 @@ import javax.persistence.Id;
 @Table(name = "accountdetails")
 public class Account {
 
-    private int id;
+    private long id;
     private long AccountNumber;
     private String AccountType;
     private String BankName;
@@ -21,23 +21,28 @@ public class Account {
     public Account() {
     }
 
-    public Account(long accountNumber, String accountType, String bankName, String branchName, long accountBalance) {
-        AccountNumber = accountNumber;
-        AccountType = accountType;
-        BankName = bankName;
-        BranchName = branchName;
-        AccountBalance = accountBalance;
-    }
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
 
-    public int getId() {
+
+    public Account(long id, long accountNumber, String accountType, String bankName, String branchName, long accountBalance) {
+        this.id = id;
+        this.AccountNumber = accountNumber;
+        this.AccountType = accountType;
+        this.BankName = bankName;
+        this.BranchName = branchName;
+        this.AccountBalance = accountBalance;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
+
+    @Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+
 
 
 
@@ -94,7 +99,8 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "AccountNumber=" + AccountNumber +
+                "id=" + id +
+                ", AccountNumber=" + AccountNumber +
                 ", AccountType='" + AccountType + '\'' +
                 ", BankName='" + BankName + '\'' +
                 ", BranchName='" + BranchName + '\'' +

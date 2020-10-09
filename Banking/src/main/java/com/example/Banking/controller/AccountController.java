@@ -29,7 +29,7 @@ public class AccountController {
         accountRepository.deleteById(AcNumber);
     }
 
-    @PutMapping("/updateAccount/{AccountNumber}")
+    @PutMapping("/updateAccount/AccountNumber}")
     public void updateAccount(@PathVariable(value = "AccountNumber") Long AcNumber,
                                @RequestBody Account accountDetails) throws ResourceNotFoundException {
         Account accounts = accountRepository.findById(AcNumber)
