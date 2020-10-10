@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -19,6 +20,11 @@ public class AccountController {
         return accountRepository.findAll();
     }
 
+
+    @GetMapping("/getOneAccountDetails/{AccountNumber}")
+    public Optional<Account> getOneUser(@PathVariable(value = "AccountNumber") Long AcNumber) {
+        return accountRepository.findById(AcNumber);
+    }
     @PostMapping("/createAccount")
     public Account createAccount(@RequestBody Account account) {
         return accountRepository.save(account);
