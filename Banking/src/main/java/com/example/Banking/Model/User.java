@@ -19,13 +19,14 @@ public class User {
         private String address;
         private long contact_number;
         private String email;
+        private long balance;
 
 
         public User() {
 
         }
 
-        public User(String firstName, String lastName, Date dob, int age, String address, long contact_number,String email) {
+        public User(String firstName, String lastName, Date dob, int age, String address, long contact_number,String email,long balance) {
             this.firstName = firstName;
             this.lastName = lastName;
             this.dob=dob;
@@ -33,6 +34,7 @@ public class User {
             this.address=address;
             this.contact_number = contact_number;
             this.email = email;
+            this.balance= balance;
         }
 
         @Id
@@ -93,14 +95,24 @@ public class User {
         this.email = email;
     }
 
-        @Override
-        public String toString() {
-            return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", Date of Birth=" + dob +", /n" +
-                    "age=" + age + "address=" + address +", contact_number=" + contact_number + ", email=" +email + "]";
-        }
+        @Column(name = "balance", nullable = false)
+        public long getBalance() { return balance; }
+        public long setBalance(long balance) { return this.balance = balance;}
 
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dob=" + dob +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                ", contact_number=" + contact_number +
+                ", email='" + email + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
 
 
 }

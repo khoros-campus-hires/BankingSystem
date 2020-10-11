@@ -52,6 +52,53 @@ public class UserController {
         user.setAddress(userDetails.getAddress());
         user.setContact_number(userDetails.getContact_number());
         user.setEmail((userDetails.getEmail()));
+        user.setBalance(userDetails.getBalance());
         userRepository.save(user);
     }
+
+    @PutMapping("/transaction/{id}")
+        public String transaction(@PathVariable(value = "id") Long userId, @RequestBody User userAmount) throws ResourceNotFoundException {
+        User sender = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
+
+        //deducting
+        if( sender.getBalance() > userAmount.getBalance()) {
+            long hi = sender.setBalance(sender.getBalance() - userAmount.getBalance());
+            sender.setBalance(hi);
+            userRepository.save(sender);
+        }
+        else {
+            return "invalid balance";
+        }
+
+
+        //crediting
+        User reciever =userRepository.findById(userAmount.getId()).orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
+        long hii = reciever.setBalance(reciever.getBalance() + userAmount.getBalance());
+        userRepository.save(reciever);
+
+
+
+        return "success";
+
+        /*EntityManagerFactory emf = Persistence.createEntityManagerFactory( "Student_details" );
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin( );
+        Query query = (Query) em.createQuery("Select * from users");
+        List<String> list =query.getResultList();*/
+    }
+
+
+    /*
+     {
+        "id": 345,
+        "firstName": "Nithi",
+        "lastName": "nandha",
+        "dob": "2017-06-15",
+        "age": 104,
+        "address": "kailasa",
+        "contact_number": 9999999999,
+        "email": "nithi@kailash.com"
+    }
+    */
 }
