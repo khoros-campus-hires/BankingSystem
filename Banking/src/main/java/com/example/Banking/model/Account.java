@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Table(name = "accountdetails")
+@Table(name = "accountdetails1")
 public class Account {
 
     private long id;
@@ -17,21 +17,24 @@ public class Account {
     private String BankName;
     private String BranchName;
     private long AccountBalance;
+    private String IfscCode;
+    private long cif;
 
     public Account() {
     }
 
-
-
-    public Account(long id, long accountNumber, String accountType, String bankName, String branchName, long accountBalance) {
+    public Account(long id, long accountNumber, String accountType, String bankName, String branchName, long accountBalance, String ifscCode, long cif) {
         this.id = id;
-        this.AccountNumber = accountNumber;
-        this.AccountType = accountType;
-        this.BankName = bankName;
-        this.BranchName = branchName;
-        this.AccountBalance = accountBalance;
+        AccountNumber = accountNumber;
+        AccountType = accountType;
+        BankName = bankName;
+        BranchName = branchName;
+        AccountBalance = accountBalance;
+        IfscCode = ifscCode;
+        this.cif = cif;
     }
 
+    @Id
     public long getId() {
         return id;
     }
@@ -40,13 +43,9 @@ public class Account {
         this.id = id;
     }
 
-    @Id
+
     //@GeneratedValue(strategy = GenerationType.AUTO)
-
-
-
-
-    @Column(name = "Account_Number",nullable = false)
+    @Column(name = "account_number",nullable = false)
     public long getAccountNumber()
     {
         return AccountNumber;
@@ -56,7 +55,7 @@ public class Account {
         AccountNumber = accountNumber;
     }
 
-    @Column(name = "Account_Type",nullable = false)
+    @Column(name = "account_type",nullable = false)
     public String getAccountType()
     {
         return AccountType;
@@ -66,7 +65,7 @@ public class Account {
         AccountType = accountType;
     }
 
-    @Column(name = "Bank_Name",nullable = false)
+    @Column(name = "bank_name",nullable = false)
     public String getBankName()
     {
         return BankName;
@@ -75,7 +74,7 @@ public class Account {
         BankName = bankName;
     }
 
-    @Column(name = "Branch_Name",nullable = false)
+    @Column(name = "branch_name",nullable = false)
     public String getBranchName() {
         return BranchName;
     }
@@ -86,7 +85,7 @@ public class Account {
         BranchName = branchName;
     }
 
-    @Column(name = "Account_Balance",nullable = false)
+    @Column(name = "account_balance",nullable = false)
     public long getAccountBalance()
     {
         return AccountBalance;
@@ -94,6 +93,23 @@ public class Account {
     public void setAccountBalance(long accountBalance)
     {
         AccountBalance = accountBalance;
+    }
+
+    @Column(name = "ifsc_code",nullable = false)
+    public String getIfscCode() {
+        return IfscCode;
+    }
+    public void setIfscCode(String ifscCode) {
+        IfscCode = ifscCode;
+    }
+
+    @Column(name = "cif",nullable = false)
+    public long getCif() {
+        return cif;
+    }
+
+    public void setCif(long cif) {
+        this.cif = cif;
     }
 
     @Override
@@ -105,6 +121,8 @@ public class Account {
                 ", BankName='" + BankName + '\'' +
                 ", BranchName='" + BranchName + '\'' +
                 ", AccountBalance=" + AccountBalance +
+                ", IfscCode='" + IfscCode + '\'' +
+                ", CIF=" + cif +
                 '}';
     }
 }
