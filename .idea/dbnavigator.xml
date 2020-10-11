@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="a6cca804-66bc-49d5-88be-988b7c15d0b5">
-        <schema name="heros" object-types="view, procedure, table, function" />
+        <schema name="heros" object-types="procedure, table, view, function" />
       </connection>
     </loaded-nodes>
   </component>

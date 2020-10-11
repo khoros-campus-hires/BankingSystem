@@ -77,15 +77,7 @@ public class UserController {
         long hii = reciever.setBalance(reciever.getBalance() + userAmount.getBalance());
         userRepository.save(reciever);
 
-
-
         return "success";
-
-        /*EntityManagerFactory emf = Persistence.createEntityManagerFactory( "Student_details" );
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin( );
-        Query query = (Query) em.createQuery("Select * from users");
-        List<String> list =query.getResultList();*/
     }
 
 
