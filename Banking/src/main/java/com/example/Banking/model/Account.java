@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Table(name = "accountdetails1")
+@Table(name = "accountdetails2")
 public class Account {
 
     private long id;
@@ -18,12 +18,14 @@ public class Account {
     private String BranchName;
     private long AccountBalance;
     private String IfscCode;
-    private long cif;
+    private long CifNumber;
+
+
 
     public Account() {
     }
 
-    public Account(long id, long accountNumber, String accountType, String bankName, String branchName, long accountBalance, String ifscCode, long cif) {
+    public Account(long id, long accountNumber, String accountType, String bankName, String branchName, long accountBalance, String ifscCode, long cifNumber) {
         this.id = id;
         AccountNumber = accountNumber;
         AccountType = accountType;
@@ -31,7 +33,7 @@ public class Account {
         BranchName = branchName;
         AccountBalance = accountBalance;
         IfscCode = ifscCode;
-        this.cif = cif;
+        CifNumber = cifNumber;
     }
 
     @Id
@@ -103,13 +105,13 @@ public class Account {
         IfscCode = ifscCode;
     }
 
-    @Column(name = "cif",nullable = false)
-    public long getCif() {
-        return cif;
+    @Column(name = "cif_number",nullable = false)
+    public long getCifNumber() {
+        return CifNumber;
     }
 
-    public void setCif(long cif) {
-        this.cif = cif;
+    public void setCifNumber(long cifNumber) {
+        CifNumber = cifNumber;
     }
 
     @Override
@@ -122,7 +124,7 @@ public class Account {
                 ", BranchName='" + BranchName + '\'' +
                 ", AccountBalance=" + AccountBalance +
                 ", IfscCode='" + IfscCode + '\'' +
-                ", CIF=" + cif +
+                ", CifNumber=" + CifNumber +
                 '}';
     }
 }

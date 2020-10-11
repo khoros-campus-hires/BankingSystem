@@ -39,7 +39,7 @@ public class AccountController {
     }
 
     @PutMapping("/updateAccount/{id}")
-    public void updateAccount(@PathVariable(value = "id") Long AcNumber, @org.jetbrains.annotations.NotNull @RequestBody Account accountDetails) throws ResourceNotFoundException {
+    public void updateAccount(@PathVariable(value = "id") Long AcNumber,  @RequestBody Account accountDetails) throws ResourceNotFoundException {
         acNumber = AcNumber;
         this.accountDetails = accountDetails;
         Account accounts = accountRepository.findById(AcNumber)
@@ -51,7 +51,8 @@ public class AccountController {
         accounts.setBranchName(accountDetails.getBranchName());
         accounts.setAccountBalance(accountDetails.getAccountBalance());
         accounts.setIfscCode(accountDetails.getIfscCode());
-        accounts.setCif(accountDetails.getCif());
+        accounts.setCifNumber(accountDetails.getCifNumber());
+
 
         accountRepository.save(accounts);
     }
