@@ -39,23 +39,6 @@ public class UserController {
         userRepository.deleteById(userId);
     }
 
-    @PutMapping("/UpdateUser/{id}")
-    public void updateEmployee(@PathVariable(value = "id") Long userId,
-                               /*@Valid*/ @RequestBody User userDetails) throws ResourceNotFoundException {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
-
-        user.setfirstName(userDetails.getfirstName());
-        user.setlastName(userDetails.getlastName());
-        user.setDob((userDetails.getDob()));
-        user.setAge(userDetails.getAge());
-        user.setAddress(userDetails.getAddress());
-        user.setContact_number(userDetails.getContact_number());
-        user.setEmail((userDetails.getEmail()));
-        user.setBalance(userDetails.getBalance());
-        userRepository.save(user);
-    }
-
     @PutMapping("/transaction/{id}")
         public String transaction(@PathVariable(value = "id") Long userId, @RequestBody User userAmount) throws ResourceNotFoundException {
         User sender = userRepository.findById(userId)
@@ -70,8 +53,7 @@ public class UserController {
         else {
             return "invalid balance";
         }
-
-
+        
         //crediting
         User reciever =userRepository.findById(userAmount.getId()).orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
         long hii = reciever.setBalance(reciever.getBalance() + userAmount.getBalance());
@@ -79,8 +61,6 @@ public class UserController {
 
         return "success";
     }
-
-
     /*
      {
         "id": 345,
