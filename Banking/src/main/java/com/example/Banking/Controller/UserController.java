@@ -10,8 +10,6 @@ import com.example.Banking.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-//import javax.validation.Valid;
-
 
 @RestController
 @RequestMapping("/Users")
@@ -30,20 +28,26 @@ public class UserController {
     }
 
     @PostMapping("/CreateUser")
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    public String createUser(@RequestBody User user) {
+         userRepository.save(user);
+         return "User details inserted successfully";
     }
 
     @DeleteMapping("/DeleteUser/{id}")
-    public void deleteUser(@PathVariable(value = "id") Long userId){
+    public String deleteUser(@PathVariable(value = "id") Long userId){
+
         userRepository.deleteById(userId);
+        return "User deleted successfully";
+
     }
 
     @PutMapping("/UpdateUser/{id}")
-    public void updateEmployee(@PathVariable(value = "id") Long userId,
-                               /*@Valid*/ @RequestBody User userDetails) throws ResourceNotFoundException {
+    public String updateEmployee(@PathVariable(value = "id") Long userId,
+                                @RequestBody User userDetails) throws ResourceNotFoundException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
+
+
 
         user.setfirstName(userDetails.getfirstName());
         user.setlastName(userDetails.getlastName());
@@ -53,5 +57,6 @@ public class UserController {
         user.setContact_number(userDetails.getContact_number());
         user.setEmail((userDetails.getEmail()));
         userRepository.save(user);
+        return "User details updated successfully";
     }
 }
