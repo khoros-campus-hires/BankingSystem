@@ -7,6 +7,7 @@ import com.example.Banking.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,26 +19,32 @@ public class AccountController {
     private Long acNumber;
     private Account accountDetails;
 
+    //To get account details of all users
     @GetMapping("/getAccountDetails")
     public List<Account> getAllAccountDetails() {
         return accountRepository.findAll();
     }
 
 
+    //To get account details of one particular user
     @GetMapping("/getOneAccountDetails/{id}")
     public Optional<Account> getOneUser(@PathVariable(value = "id") Long AcNumber) {
         return accountRepository.findById(AcNumber);
     }
+
+    //To create account of user
     @PostMapping("/createAccount")
     public Account createAccount(@RequestBody Account account) {
         return accountRepository.save(account);
     }
 
+    //To delete account of user
     @DeleteMapping("/deleteAccountDetails/{id}")
     public void deleteAccountDetails(@PathVariable(value = "id") Long AcNumber){
         accountRepository.deleteById(AcNumber);
     }
 
+    //To update account of user
     @PutMapping("/updateAccount/{id}")
     public void updateAccount(@PathVariable(value = "id") Long AcNumber,  @RequestBody Account accountDetails) throws ResourceNotFoundException {
         acNumber = AcNumber;
