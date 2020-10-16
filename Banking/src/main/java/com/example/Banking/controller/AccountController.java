@@ -1,66 +1,52 @@
 package com.example.Banking.controller;
 
 
+import com.example.Banking.dao.AccountDaoImpl;
 import com.example.Banking.exception.ResourceNotFoundException;
 import com.example.Banking.model.Account;
-import com.example.Banking.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/v2")
+
 public class AccountController {
     @Autowired
-    private AccountRepository accountRepository;
-    private Long acNumber;
-    private Account accountDetails;
 
-    //To get account details of all users
-    @GetMapping("/getAccountDetails")
-    public List<Account> getAllAccountDetails() {
-        return accountRepository.findAll();
+    private AccountDaoImpl accountDao;
+    @GetMapping("/GetAllAccounts")
+    public List<Account> getAllAccounts() {
+        return accountDao.getAll();
+    }
+
+    @GetMapping("/GetOneAccount/{id}")
+    public Optional<Account> getOneAccount(@PathVariable(value = "id") Long accountId) {
+        return accountDao.getAccount(accountId);
+    }
+
+    @PostMapping("/CreateAccount")
+    public void createAccount(@RequestBody Account account) {
+        accountDao.insertAccount(account);
+
+    }
+
+    @DeleteMapping("/DeleteAccount/{id}")
+    public void deleteAccount(@PathVariable(value = "id") Long accountId) {
+
+        accountDao.deleteAccount(accountId);
+
+    }
+
+    @PutMapping("/UpdateAccount/{id}")
+    public void updateAccount(@PathVariable(value = "id") Long accountId, @RequestBody Account account) {
+        accountDao.updateAccount(account, accountId);
+
     }
 
 
-    //To get account details of one particular user
-    @GetMapping("/getOneAccountDetails/{id}")
-    public Optional<Account> getOneUser(@PathVariable(value = "id") Long AcNumber) {
-        return accountRepository.findById(AcNumber);
-    }
-
-    //To create account of user
-    @PostMapping("/createAccount")
-    public Account createAccount(@RequestBody Account account) {
-        return accountRepository.save(account);
-    }
-
-    //To delete account of user
-    @DeleteMapping("/deleteAccountDetails/{id}")
-    public void deleteAccountDetails(@PathVariable(value = "id") Long AcNumber){
-        accountRepository.deleteById(AcNumber);
-    }
-
-    //To update account of user
-    @PutMapping("/updateAccount/{id}")
-    public void updateAccount(@PathVariable(value = "id") Long AcNumber,  @RequestBody Account accountDetails) throws ResourceNotFoundException {
-        acNumber = AcNumber;
-        this.accountDetails = accountDetails;
-        Account accounts = accountRepository.findById(AcNumber)
-                .orElseThrow(() -> new ResourceNotFoundException("Account not found for this id :: " + AcNumber));
-
-        accounts.setAccountNumber(accountDetails.getAccountNumber());
-        accounts.setAccountType(accountDetails.getAccountType());
-        accounts.setBankName(accountDetails.getBankName());
-        accounts.setBranchName(accountDetails.getBranchName());
-        accounts.setAccountBalance(accountDetails.getAccountBalance());
-        accounts.setIfscCode(accountDetails.getIfscCode());
-        accounts.setCifNumber(accountDetails.getCifNumber());
-
-
-        accountRepository.save(accounts);
-    }
 }
