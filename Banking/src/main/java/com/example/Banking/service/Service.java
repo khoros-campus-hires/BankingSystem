@@ -38,7 +38,7 @@ public class Service {
 
         //crediting
         User reciever =userRepository.findById(sender.getId()).orElseThrow(() -> new IdNotFound("reciever id not found"));
-        long balance2 = reciever.setBalance(reciever.getBalance() + sender.getBalance());
+        reciever.setBalance(reciever.getBalance() + sender.getBalance());
         userRepository.save(reciever);
 
         return new TransactionStatus().returnMsg("Transaction Sucess");
