@@ -2,10 +2,10 @@ package com.example.Banking.service;
 
 public class TransactionStatus {
 
-    private String successMessage;
+    private String Message;
 
-    public String returnMsg(String successMessage){
-        return successMessage;
+    public String returnMsg(String Message){
+        return Message;
     }
 
 
