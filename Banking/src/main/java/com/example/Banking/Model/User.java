@@ -1,48 +1,54 @@
 package com.example.Banking.Model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Date;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
-        private long id;
-        private long balance;
 
+    @Id
+    @GeneratedValue
+    private long id;
+    private long accountNumber;
+    private long balance;
 
-        public User() {}
+    public long getId() {
+        return id;
+    }
 
-        public User(long balance) {
-            this.balance= balance;
-        }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-        @Id
-        //@GeneratedValue(strategy = GenerationType.AUTO)
-        @Column(name = "id", nullable=false)
-        public long getId() {
-            return id;
-        }
-        public void setId(long id) {
-            this.id = id;
-        }
+    public long getAccountNumber() {
+        return accountNumber;
+    }
 
-        @Column(name = "balance", nullable = false)
-        public long getBalance() { return balance; }
-        public long setBalance(long balance) { return this.balance = balance;}
+    public void setAccountNumber(long accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public long getBalance() {
+        return balance;
+    }
+
+    public long setBalance(long balance) {
+        this.balance = balance;
+        return balance;
+    }
+
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", accountNumber=" + accountNumber +
                 ", balance=" + balance +
                 '}';
     }
-
 
 }
 
