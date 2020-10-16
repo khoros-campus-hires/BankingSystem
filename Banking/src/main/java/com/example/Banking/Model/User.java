@@ -8,6 +8,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "Users")
+
 public class User {
         private long id;
         private String firstName;
@@ -23,7 +24,8 @@ public class User {
 
         }
 
-        public User(String firstName, String lastName, Date dob, int age, String address, long contact_number,String email) {
+        public User(long id, String firstName, String lastName, Date dob, int age, String address, long contact_number,String email) {
+            this.id=id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.dob=dob;
@@ -43,18 +45,18 @@ public class User {
         }
 
         @Column(name = "first_name", nullable = false)
-        public String getfirstName() {
+        public String getFirstName() {
             return firstName;
         }
-        public void setfirstName(String firstName) {
+        public void setFirstName(String firstName) {
             this.firstName = firstName;
         }
 
         @Column(name = "last_name", nullable = false)
-        public String getlastName() {
+        public String getLastName() {
         return lastName;
     }
-        public void setlastName(String lastName) {
+        public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
