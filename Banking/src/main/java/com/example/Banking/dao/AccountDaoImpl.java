@@ -12,7 +12,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Autowired
     private AccountRepository accountRepository;
-    private Account accountDetails;
+
 
     @Override
     public List<Account> getAll() {
@@ -39,17 +39,17 @@ public class AccountDaoImpl implements AccountDao {
     public void updateAccount(Account account, long AcNumber) {
         Account accounts = accountRepository.findById(AcNumber).orElse(null);
         //.orElseThrow(() -> new ResourceNotFoundException("Account not found for this id :: " + AcNumber));
-        //assert accounts != null;
-        accounts.setAccountNumber(accountDetails.getAccountNumber());
-        accounts.setAccountType(accountDetails.getAccountType());
-        accounts.setBankName(accountDetails.getBankName());
-        accounts.setBranchName(accountDetails.getBranchName());
-        accounts.setAccountBalance(accountDetails.getAccountBalance());
-        accounts.setIfscCode(accountDetails.getIfscCode());
-        accounts.setCifNumber(accountDetails.getCifNumber());
-        accounts.setInitialPayment(accountDetails.getInitialPayment());
+        assert accounts != null;
+        accounts.setAccountNumber(account.getAccountNumber());
+        accounts.setAccountType(account.getAccountType());
+        accounts.setBankName(account.getBankName());
+        accounts.setBranchName(account.getBranchName());
+        accounts.setAccountBalance(account.getAccountBalance());
+        accounts.setIfscCode(account.getIfscCode());
+        accounts.setCifNumber(account.getCifNumber());
+        accounts.setInitialPayment(account.getInitialPayment());
 
-        accountRepository.save(accounts);
+        accountRepository.save(account);
 
     }
 
