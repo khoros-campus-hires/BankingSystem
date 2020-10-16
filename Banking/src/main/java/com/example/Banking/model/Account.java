@@ -3,8 +3,6 @@ package com.example.Banking.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -19,13 +17,14 @@ public class Account {
     private long AccountBalance;
     private String IfscCode;
     private long CifNumber;
+    private long InitialPayment;
 
 
 
     public Account() {
     }
 
-    public Account(long id, long accountNumber, String accountType, String bankName, String branchName, long accountBalance, String ifscCode, long cifNumber) {
+    public Account(long id, long accountNumber, String accountType, String bankName, String branchName, long accountBalance, String ifscCode, long cifNumber, long initialPayment) {
         this.id = id;
         AccountNumber = accountNumber;
         AccountType = accountType;
@@ -34,6 +33,7 @@ public class Account {
         AccountBalance = accountBalance;
         IfscCode = ifscCode;
         CifNumber = cifNumber;
+        InitialPayment = initialPayment;
     }
 
     @Id
@@ -114,6 +114,15 @@ public class Account {
         CifNumber = cifNumber;
     }
 
+    @Column(name = "initial_payment",nullable = false)
+    public long getInitialPayment() {
+        return InitialPayment;
+    }
+
+    public void setInitialPayment(long initialPayment) {
+        InitialPayment = initialPayment;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -125,6 +134,7 @@ public class Account {
                 ", AccountBalance=" + AccountBalance +
                 ", IfscCode='" + IfscCode + '\'' +
                 ", CifNumber=" + CifNumber +
+                ", InitialPayment=" + InitialPayment +
                 '}';
     }
 }

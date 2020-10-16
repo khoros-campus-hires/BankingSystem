@@ -47,7 +47,7 @@ public class AccountDaoImpl implements AccountDao {
         accounts.setAccountBalance(accountDetails.getAccountBalance());
         accounts.setIfscCode(accountDetails.getIfscCode());
         accounts.setCifNumber(accountDetails.getCifNumber());
-
+        accounts.setInitialPayment(accountDetails.getInitialPayment());
 
         accountRepository.save(accounts);
 
