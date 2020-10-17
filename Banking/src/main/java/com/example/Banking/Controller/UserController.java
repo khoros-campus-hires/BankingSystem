@@ -1,5 +1,6 @@
 package com.example.Banking.Controller;
 import com.example.Banking.Model.User;
+import com.example.Banking.Model.UserTranasaction;
 import com.example.Banking.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class UserController {
 
     //Transaction
     @PutMapping("/transaction/{id}")
-    public String transactionService(@PathVariable(value = "id") Long senderId,@RequestBody User sender) throws Exception {
+    public String transactionService(@PathVariable(value = "id") Long senderId,@RequestBody UserTranasaction sender) throws Exception {
        return service.transaction(senderId,sender);
     }
 

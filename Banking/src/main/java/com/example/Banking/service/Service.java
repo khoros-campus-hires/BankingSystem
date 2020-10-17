@@ -1,8 +1,8 @@
 package com.example.Banking.service;
 
 import com.example.Banking.Exception.IdNotFound;
-import com.example.Banking.Exception.ResourceNotFoundException;
 import com.example.Banking.Model.User;
+import com.example.Banking.Model.UserTranasaction;
 import com.example.Banking.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,27 +18,36 @@ public class Service {
     }
 
     //transaction
-    public String transaction(Long senderId, User sender) throws Exception {
+    public String transaction(Long senderId, UserTranasaction sender) throws Exception {
         //User senderAccount = userRepository.findById(senderId)
-         //       .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + senderId));
+        //       .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + senderId));
         User senderAccount = userRepository.findById(senderId)
-                .orElseThrow(() -> new IdNotFound("sender id not found"));
-        //deducting
-        if( senderAccount.getBalance() > sender.getBalance()) {
-            long balance = senderAccount.setBalance(senderAccount.getBalance() - sender.getBalance());
-            senderAccount.setBalance(balance);
-            userRepository.save(senderAccount);
-        }
-        else {
-            return new TransactionStatus().returnMsg("Transaction FAiled due to insuficient balance");
-        }
+                .orElseThrow(() -> new IdNotFound("Sender Account id not found") );
 
-        //crediting
-        User reciever =userRepository.findById(sender.getId()).orElseThrow(() -> new IdNotFound("reciever id not found"));
-        reciever.setBalance(reciever.getBalance() + sender.getBalance());
-        userRepository.save(reciever);
+        User recieverAccount = userRepository.findById(sender.getReceiverId())
+                .orElseThrow(() -> new IdNotFound("Reciver account id not found") );
+
+        if( senderAccount.getAccountNumber() == sender.getFromAccount())
+        {
+            if(recieverAccount.getAccountNumber() == sender.getToAccount() )
+            {
+                if( senderAccount.getBalance() > sender.getTransferAmount()) {
+                    long balance = senderAccount.setBalance(senderAccount.getBalance() - sender.getTransferAmount());
+                    senderAccount.setBalance(balance);
+                    userRepository.save(senderAccount);
+                }
+                else {
+                    return new TransactionStatus().returnMsg("Transaction Failed due to insuficient balance");
+                }
+                recieverAccount.setBalance(recieverAccount.getBalance() + sender.getTransferAmount());
+                userRepository.save(recieverAccount);
+            }
+            else return new TransactionStatus().returnMsg("Reciver account is not available");
+        }
+        else return new TransactionStatus().returnMsg("Sender Account is not available");
 
         return new TransactionStatus().returnMsg("Transaction Sucess");
+
     }
 
 }
