@@ -1,20 +1,9 @@
 package com.example.Banking.Model;
 
 public class UserTranasaction {
-    private long receiverId;
     private long fromAccount;
     private long toAccount;
-
-
     private long transferAmount;
-
-    public long getReceiverId() {
-        return receiverId;
-    }
-
-    public void setReceiverId(long receiverId) {
-        this.receiverId = receiverId;
-    }
 
     public long getFromAccount() {
         return fromAccount;

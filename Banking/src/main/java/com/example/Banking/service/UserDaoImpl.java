@@ -23,4 +23,24 @@ public class UserDaoImpl  implements UserDao{
     public Optional<User> getAccount(long id) {
         return userRepository.findById(id);
     }
+
+    @Override
+    public User getAccountByAccountNumber(long AccountNumber) {
+        User recieverAcc = userRepository.findByAccNo(AccountNumber);
+        return recieverAcc;
+    }
+
+    @Override
+    public void updateBalance(long sender_bal, User sender) throws Exception {
+        sender.setBalance(sender.getBalance() - sender_bal);
+        userRepository.save(sender);
+    }
+
+    @Override
+    public void updateReceiverBalance(long receiverAmount, User reciever) {
+        reciever.setBalance(reciever.getBalance() + receiverAmount);
+        userRepository.save(reciever);
+    }
+
+
 }

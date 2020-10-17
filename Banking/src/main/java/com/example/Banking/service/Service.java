@@ -11,8 +11,6 @@ import java.util.Optional;
 
 @org.springframework.stereotype.Service
 public class Service {
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private UserDao userDao;
@@ -24,41 +22,32 @@ public class Service {
 
 
     //getById
-    public Optional<User> getOneAccount(long id){
-        return userDao.getAccount(id);
-    }
+    public Optional<User> getOneAccount(long id){ return userDao.getAccount(id); }
+
 
     //transaction
     public String transaction(Long senderId, UserTranasaction sender) throws Exception {
-        //User senderAccount = userRepository.findById(senderId)
-        //       .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + senderId));
-        User senderAccount = userRepository.findById(senderId)
-                .orElseThrow(() -> new IdNotFound("Sender Account id not found") );
 
-        User recieverAccount = userRepository.findById(sender.getReceiverId())
-                .orElseThrow(() -> new IdNotFound("Reciver account id not found") );
+        User senderAcc = userDao.getAccount(senderId).orElseThrow(() -> new IdNotFound("Sender Account id not found"));
+        User recieverAcc = userDao.getAccountByAccountNumber(sender.getToAccount());
 
-        if( senderAccount.getAccountNumber() == sender.getFromAccount())
+        if( senderAcc.getAccountNumber() == sender.getFromAccount())
         {
-            if(recieverAccount.getAccountNumber() == sender.getToAccount() )
+            if(recieverAcc.getAccountNumber() == sender.getToAccount() )
             {
-                if( senderAccount.getBalance() > sender.getTransferAmount()) {
-                    long balance = senderAccount.setBalance(senderAccount.getBalance() - sender.getTransferAmount());
-                    senderAccount.setBalance(balance);
-                    userRepository.save(senderAccount);
+                if( senderAcc.getBalance() > sender.getTransferAmount()) {
+                    userDao.updateBalance(sender.getTransferAmount(), senderAcc);
                 }
                 else {
                     return new TransactionStatus().returnMsg("Transaction Failed due to insuficient balance");
                 }
-                recieverAccount.setBalance(recieverAccount.getBalance() + sender.getTransferAmount());
-                userRepository.save(recieverAccount);
+                userDao.updateReceiverBalance(sender.getTransferAmount(), recieverAcc);
             }
             else return new TransactionStatus().returnMsg("Reciver account is not available");
         }
         else return new TransactionStatus().returnMsg("Sender Account is not available");
 
         return new TransactionStatus().returnMsg("Transaction Sucess");
-
     }
 
 }

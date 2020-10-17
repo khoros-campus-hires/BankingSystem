@@ -9,9 +9,12 @@ import java.util.Optional;
 
 public interface UserDao {
 
-
-
     public List<User> getAll( );
     Optional<User> getAccount(long id);
+    User getAccountByAccountNumber(long AccountNumber);
+    public void updateBalance( long sender_bal,User sender) throws Exception;
+    public void updateReceiverBalance(long receiverAmount, User reciever );
+
+
 
 }
