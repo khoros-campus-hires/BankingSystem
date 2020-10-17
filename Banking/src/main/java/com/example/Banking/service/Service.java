@@ -7,14 +7,25 @@ import com.example.Banking.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 @org.springframework.stereotype.Service
 public class Service {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserDao userDao;
+
     //get
     public List<User> getEveryUser(){
-        return userRepository.findAll();
+        return userDao.getAll();
+    }
+
+
+    //getById
+    public Optional<User> getOneAccount(long id){
+        return userDao.getAccount(id);
     }
 
     //transaction
