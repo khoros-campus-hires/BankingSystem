@@ -1,5 +1,6 @@
 package com.example.Banking.service;
 
+import com.example.Banking.Exception.IdNotFound;
 import com.example.Banking.Model.User;
 import com.example.Banking.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,21 @@ public class UserDaoImpl  implements UserDao{
         return userRepository.findById(id);
     }
 
+
     @Override
-    public User getAccountByAccountNumber(long AccountNumber) {
-        User recieverAcc = userRepository.findByAccNo(AccountNumber);
-        return recieverAcc;
+    public User getAccountByAccountNumber(long AccountNumber) throws IdNotFound {
+        try {
+            User recieverAcc = userRepository.findByAccNo(AccountNumber);
+            return recieverAcc;
+
+        }
+        catch (Exception e)
+        {
+            throw new IdNotFound(" imjo");
+        }
+
     }
+
 
     @Override
     public void updateBalance(long sender_bal, User sender) throws Exception {

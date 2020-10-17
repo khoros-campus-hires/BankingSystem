@@ -29,11 +29,12 @@ public class Service {
     public String transaction(Long senderId, UserTranasaction sender) throws Exception {
 
         User senderAcc = userDao.getAccount(senderId).orElseThrow(() -> new IdNotFound("Sender Account id not found"));
+
         User recieverAcc = userDao.getAccountByAccountNumber(sender.getToAccount());
 
-        if( senderAcc.getAccountNumber() == sender.getFromAccount())
+        if( senderAcc.getAccountNumber() == sender.getFromAccount() )
         {
-            if(recieverAcc.getAccountNumber() == sender.getToAccount() )
+            if( recieverAcc.getAccountNumber() == sender.getToAccount() )
             {
                 if( senderAcc.getBalance() > sender.getTransferAmount()) {
                     userDao.updateBalance(sender.getTransferAmount(), senderAcc);

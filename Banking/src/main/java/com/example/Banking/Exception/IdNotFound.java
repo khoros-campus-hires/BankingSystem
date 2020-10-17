@@ -1,9 +1,11 @@
 package com.example.Banking.Exception;
 
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+@Data
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 @Component
 public class IdNotFound extends Exception {
@@ -25,29 +27,6 @@ public class IdNotFound extends Exception {
         this.code = code;
         this.msg = msg;
     }
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
 
-
-    /*
-    public void throwException() throws IdNotFound{
-        IdNotFound e = new IdNotFound();
-        e.setCode(500);
-        e.setMsg("UserId not found");
-        throw e;
-    }*/
 }
