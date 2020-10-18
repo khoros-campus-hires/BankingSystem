@@ -1,4 +1,5 @@
 package com.example.Banking.dao;
+import com.example.Banking.exception.IdNotFound;
 import com.example.Banking.model.Account;
 import com.example.Banking.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,8 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public void updateAccount(Account account, long AcNumber) {
-        Account accounts = accountRepository.findById(AcNumber).orElse(null);
-        //.orElseThrow(() -> new ResourceNotFoundException("Account not found for this id :: " + AcNumber));
-        assert accounts != null;
+    public void updateAccount(Account account, long AcNumber) throws IdNotFound {
+        Account accounts = accountRepository.findById(AcNumber).orElseThrow(() -> new IdNotFound("Id not Found"));
         accounts.setAccountNumber(account.getAccountNumber());
         accounts.setAccountType(account.getAccountType());
         accounts.setBankName(account.getBankName());

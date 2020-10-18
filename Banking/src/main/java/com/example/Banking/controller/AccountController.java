@@ -2,8 +2,9 @@ package com.example.Banking.controller;
 
 
 import com.example.Banking.dao.AccountDaoImpl;
-import com.example.Banking.exception.ResourceNotFoundException;
+//import com.example.Banking.exception.ResourceNotFoundException;
 import com.example.Banking.model.Account;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +42,7 @@ public class AccountController {
 
     }
 
+    @SneakyThrows
     @PutMapping("/UpdateAccount/{id}")
     public void updateAccount(@PathVariable(value = "id") Long accountId, @RequestBody Account account) {
         accountDao.updateAccount(account, accountId);
