@@ -17,7 +17,6 @@ import java.util.Optional;
 
 public class AccountController {
     @Autowired
-
     private AccountDaoImpl accountDao;
     @GetMapping("/GetAllAccounts")
     public List<Account> getAllAccounts() {
