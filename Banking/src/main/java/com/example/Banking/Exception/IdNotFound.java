@@ -12,21 +12,11 @@ public class IdNotFound extends Exception {
 
     private static final long serialVersionUID = 1L;
 
-    private int code;
     private String msg;
-
-    public IdNotFound() {
-
-    }
+    public IdNotFound() { }
 
     public IdNotFound(String err) {
         this.msg = err;
     }
-
-    public IdNotFound(int code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
-
 
 }

@@ -11,9 +11,7 @@ public interface UserDao {
 
     public List<User> getAll( );
     Optional<User> getAccount(long id);
-
-        User getAccountByAccountNumber ( long AccountNumber) throws IdNotFound;
-
+    User getAccountByAccountNumber ( long AccountNumber) throws IdNotFound;
     public void updateBalance( long sender_bal,User sender) throws Exception;
     public void updateReceiverBalance(long receiverAmount, User reciever ) throws Exception;
 

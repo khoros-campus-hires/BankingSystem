@@ -2,7 +2,6 @@ package com.example.Banking.Controller;
 import com.example.Banking.Model.User;
 import com.example.Banking.Model.UserTranasaction;
 import com.example.Banking.service.Service;
-import com.example.Banking.service.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +15,6 @@ public class UserController {
 
     @Autowired
     private Service service;
-    //@Autowired
-    //private UserDao userDao;
 
     @GetMapping("/getAll")
     public List<User> getAllAccountDetails() {

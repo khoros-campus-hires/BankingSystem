@@ -7,7 +7,4 @@ public class UserTranasaction {
     private long fromAccount;
     private long toAccount;
     private long transferAmount;
-
-
-
 }

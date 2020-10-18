@@ -12,6 +12,7 @@ import java.util.Optional;
 @Component
 public class UserDaoImpl  implements UserDao{
 
+
     @Autowired
     private UserRepository userRepository;
 
@@ -28,16 +29,16 @@ public class UserDaoImpl  implements UserDao{
 
     @Override
     public User getAccountByAccountNumber(long AccountNumber) throws IdNotFound {
-        try {
-            User recieverAcc = userRepository.findByAccNo(AccountNumber);
-            return recieverAcc;
-
-        }
-        catch (Exception e)
-        {
-            throw new IdNotFound(" imjo");
-        }
-
+            User recieverAcc = null;
+            long id = 0;
+             try{
+              recieverAcc = userRepository.findByAccNo(AccountNumber);
+              id = recieverAcc.getId();
+              return recieverAcc;
+             }
+             catch(Exception e)
+             { throw new IdNotFound("Receiver account is not found");
+             }
     }
 
 
