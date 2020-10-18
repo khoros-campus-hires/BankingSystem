@@ -42,9 +42,9 @@ public class AccountController {
 
     }
 
-    @SneakyThrows
+
     @PutMapping("/UpdateAccount/{id}")
-    public void updateAccount(@PathVariable(value = "id") Long accountId, @RequestBody Account account) {
+    public void updateAccount(@PathVariable(value = "id") Long accountId, @RequestBody Account account) throws Exception{
         accountDao.updateAccount(account, accountId);
 
     }
