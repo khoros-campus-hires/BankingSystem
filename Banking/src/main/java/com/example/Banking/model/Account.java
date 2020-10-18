@@ -21,18 +21,5 @@ public class Account {
     private long CifNumber;
     private long InitialPayment;
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", AccountNumber=" + AccountNumber +
-                ", AccountType='" + AccountType + '\'' +
-                ", BankName='" + BankName + '\'' +
-                ", BranchName='" + BranchName + '\'' +
-                ", AccountBalance=" + AccountBalance +
-                ", IfscCode='" + IfscCode + '\'' +
-                ", CifNumber=" + CifNumber +
-                ", InitialPayment=" + InitialPayment +
-                '}';
-    }
+
 }
