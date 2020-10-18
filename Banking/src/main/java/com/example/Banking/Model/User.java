@@ -1,15 +1,17 @@
 package com.example.Banking.Model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "Users")
-
+@Data
 public class User {
+        @Id
         private long id;
         private String firstName;
         private String lastName;
@@ -20,77 +22,6 @@ public class User {
         private String email;
 
 
-        public User() {
-
-        }
-
-        public User(long id, String firstName, String lastName, Date dob, int age, String address, long contact_number,String email) {
-            this.id=id;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.dob=dob;
-            this.age = age;
-            this.address=address;
-            this.contact_number = contact_number;
-            this.email = email;
-        }
-
-        @Id
-        @Column(name = "id", nullable=false)
-        public long getId() {
-            return id;
-        }
-        public void setId(long id) {
-            this.id = id;
-        }
-
-        @Column(name = "first_name", nullable = false)
-        public String getFirstName() {
-            return firstName;
-        }
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        @Column(name = "last_name", nullable = false)
-        public String getLastName() {
-        return lastName;
-    }
-        public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-        @Column(name="dob", nullable = false)
-        public Date getDob() { return dob;}
-        public void setDob(Date dob) { this.dob = dob; }
-
-        @Column(name = "age", nullable = false)
-        public int getAge() {
-            return age;
-        }
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-        @Column(name = "address", nullable = false)
-        public String getAddress() {
-        return address;
-    }
-        public void setAddress(String address) {
-        this.address = address;
-    }
-
-        @Column(name = "contact_number", nullable = false)
-        public long getContact_number() { return contact_number; }
-        public void setContact_number(long contact_number) { this.contact_number = contact_number; }
-
-        @Column(name = "email", nullable = false)
-        public String getEmail() {
-        return email;
-    }
-        public void setEmail(String email) {
-        this.email = email;
-    }
 
         @Override
         public String toString() {

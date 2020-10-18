@@ -6,19 +6,16 @@ import java.util.Optional;
 import com.example.Banking.Dao.UserDaoImpl;
 import com.example.Banking.Exception.ResourceNotFoundException;
 import com.example.Banking.Model.User;
-//import lombok.NonNull;
-//import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/Users")
-//@RequiredArgsConstructor
+
 public class UserController {
      @Autowired
-    //@NonNull
-    private UserDaoImpl userDao;
+     private UserDaoImpl userDao;
 
     @GetMapping("/GetAllUsers")
     public List<User> getAllUsers() {
