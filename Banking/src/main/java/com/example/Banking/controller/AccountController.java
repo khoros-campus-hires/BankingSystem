@@ -29,12 +29,11 @@ public class AccountController {
     }
 
     @DeleteMapping("/DeleteAccount/{id}")
-    public void deleteAccount(@PathVariable(value = "id") Long accountId) {
+    public void deleteAccount(@PathVariable(value = "id") Long accountId) throws IdNotFound {
 
         service.deleteAccountbyId(accountId);
 
     }
-
 
     @PutMapping("/UpdateAccount/{id}")
     public void updateAccount(@PathVariable(value = "id") Long accountId, @RequestBody Account account) throws Exception{

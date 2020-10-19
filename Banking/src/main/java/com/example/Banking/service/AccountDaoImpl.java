@@ -2,6 +2,7 @@ package com.example.Banking.service;
 import com.example.Banking.exception.IdNotFound;
 import com.example.Banking.model.Account;
 import com.example.Banking.repository.AccountRepository;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,9 +33,16 @@ public class AccountDaoImpl implements AccountDao {
 
     }
     //To delete account
+
     @Override
-    public void deleteAccount(long id) {
-        accountRepository.deleteById(id);
+    public void deleteAccount(long id) throws IdNotFound{
+        if(accountRepository.existsById(id)) {
+            accountRepository.deleteById(id);
+        }
+        else
+        {
+            throw new IdNotFound("Account is not Found for this id");
+        }
     }
 
     @Override

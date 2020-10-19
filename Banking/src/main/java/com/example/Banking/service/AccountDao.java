@@ -8,7 +8,7 @@ public interface AccountDao {
     public List<Account> getAll( );
     Account getAccount(long id) throws IdNotFound;
     void insertAccount(Account account);
-    void deleteAccount(long id);
+    void deleteAccount(long id) throws IdNotFound;
     void updateAccount(Account account, long id) throws IdNotFound;
 
 }

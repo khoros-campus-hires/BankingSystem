@@ -23,7 +23,7 @@ public class Service {
          accountDao.insertAccount(account);
     }
 
-    public void deleteAccountbyId(Long accountId) {
+    public void deleteAccountbyId(Long accountId) throws IdNotFound {
         accountDao.deleteAccount(accountId);
     }
 
