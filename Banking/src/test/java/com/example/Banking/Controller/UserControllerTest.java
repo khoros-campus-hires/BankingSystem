@@ -46,7 +46,7 @@ class UserControllerTest {
         System.out.println(actualJsonResponse);
         String expectedResponse = objectMapper.writeValueAsString(users);
         Assertions.assertThat(actualJsonResponse).isEqualToIgnoringWhitespace(expectedResponse);*/
-        String url = "/Users/getUsers";
+        String url = "/Users/GetAllUsers";
         RequestBuilder rb = MockMvcRequestBuilders.get(url).accept(MediaType.APPLICATION_JSON);
         MvcResult mvcResult = mockMvc.perform(rb).andReturn();
         String actualResponse = mvcResult.getResponse().getContentAsString();
