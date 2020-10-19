@@ -19,7 +19,7 @@ public interface UserDao  {
     void updateUser(User user, long id) throws IdNotFound;
 
 
-    void deleteUser(long id)  ;
+    void deleteUser(long id) throws IdNotFound ;
 
 
 }

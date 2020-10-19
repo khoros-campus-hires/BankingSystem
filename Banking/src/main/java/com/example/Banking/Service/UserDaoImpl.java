@@ -45,9 +45,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(long id) {
+    public void deleteUser(long id) throws IdNotFound{
 
-         userRepository.deleteById(id);
+        if(userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+        }
+        else
+        {
+            throw new IdNotFound("Account is not Found for this id");
+        }
+
 
     }
 }

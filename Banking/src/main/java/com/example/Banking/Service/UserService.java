@@ -23,7 +23,7 @@ public class UserService {
         userDao.insertUser(user);
     }
 
-    public void deleteUser(Long Id) {
+    public void deleteUser(Long Id) throws IdNotFound{
         userDao.deleteUser(Id);
     }
 
