@@ -1,6 +1,7 @@
 package com.example.Banking.Controller;
 import com.example.Banking.Model.User;
 import com.example.Banking.Model.UserTranasaction;
+import com.example.Banking.Repository.UserRepository;
 import com.example.Banking.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,11 @@ public class UserController {
 
     @Autowired
     private Service service;
-
     @GetMapping("/getAll")
     public List<User> getAllAccountDetails() {
         return service.getEveryUser();
     }
+
 
     @GetMapping("/getone/{id}")
     public Optional<User> getOneAccount(@PathVariable(value = "id") Long accountId) {
