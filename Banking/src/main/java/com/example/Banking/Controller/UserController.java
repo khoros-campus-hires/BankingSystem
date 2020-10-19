@@ -1,11 +1,10 @@
 package com.example.Banking.Controller;
 
 import java.util.List;
-import java.util.Optional;
 
-import com.example.Banking.Dao.UserDaoImpl;
-import com.example.Banking.Exception.ResourceNotFoundException;
+
 import com.example.Banking.Model.User;
+import com.example.Banking.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,34 +14,35 @@ import org.springframework.web.bind.annotation.*;
 
 public class UserController {
      @Autowired
-     private UserDaoImpl userDao;
+     private UserService userService;
 
     @GetMapping("/GetAllUsers")
     public List<User> getAllUsers() {
-        return userDao.getUsers();
+        return userService.getAll();
     }
 
     @GetMapping("/GetOneUser/{id}")
-    public Optional<User> getOneUser(@PathVariable(value = "id") Long userId) {
-        return userDao.getUser(userId);
+    public User getOneUser(@PathVariable(value = "id") Long userId) throws Exception{
+
+        return userService.getUserbyId(userId);
     }
 
     @PostMapping("/CreateUser")
     public void createUser(@RequestBody User user) {
-        userDao.insertUser(user);
+        userService.CreateUser(user);
 
     }
 
     @DeleteMapping("/DeleteUser/{id}")
     public void deleteUser(@PathVariable(value = "id") Long userId) {
 
-        userDao.deleteUser(userId);
+        userService.deleteUser(userId);
 
     }
 
     @PutMapping("/UpdateUser/{id}")
-    public void updateEmployee(@PathVariable(value = "id") Long userId, @RequestBody User user) {
-        userDao.updateUser(user, userId);
+    public void updateEmployee(@PathVariable(value = "id") Long userId, @RequestBody User user) throws Exception {
+        userService.updateUser(user, userId);
 
     }
 }

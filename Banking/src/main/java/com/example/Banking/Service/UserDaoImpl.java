@@ -1,21 +1,15 @@
-package com.example.Banking.Dao;
-import com.example.Banking.Exception.ResourceNotFoundException;
+package com.example.Banking.Service;
+import com.example.Banking.Exception.IdNotFound;
 import com.example.Banking.Model.User;
 import com.example.Banking.Repository.UserRepository;
-//import lombok.NonNull;
-//import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
 import java.util.List;
 
-
-//@RequiredArgsConstructor
 @Component
 public class UserDaoImpl implements UserDao {
 
-    //@NonNull
     @Autowired
     UserRepository userRepository;
     @Override
@@ -23,9 +17,10 @@ public class UserDaoImpl implements UserDao {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUser(long id) {
+    public User getUser(long id) throws IdNotFound {
 
-        return userRepository.findById(id) ;
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IdNotFound("User not found for this id :: " + id));
     }
 
     @Override
@@ -35,11 +30,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(User user, long id) {
-        User u = userRepository.findById(id).orElse(null);
-        //.orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
+    public void updateUser(User user, long id) throws IdNotFound {
+        User u = userRepository.findById(id)
+        .orElseThrow(() -> new IdNotFound("User not found for this id :: " + id));
 
-        assert u != null;
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
         u.setAge(user.getAge());
@@ -52,6 +46,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteUser(long id) {
-        userRepository.deleteById(id);
+
+         userRepository.deleteById(id);
+
     }
 }
