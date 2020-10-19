@@ -1,51 +1,44 @@
 package com.example.Banking.controller;
-
-
-import com.example.Banking.dao.AccountDaoImpl;
-//import com.example.Banking.exception.ResourceNotFoundException;
+import com.example.Banking.exception.IdNotFound;
 import com.example.Banking.model.Account;
-import lombok.SneakyThrows;
+import com.example.Banking.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/v2")
+@RequestMapping("/Accounts")
 
 public class AccountController {
     @Autowired
-    private AccountDaoImpl accountDao;
+    private Service service;
     @GetMapping("/GetAllAccounts")
     public List<Account> getAllAccounts() {
-        return accountDao.getAll();
+        return service.getEveryAccount();
     }
 
     @GetMapping("/GetOneAccount/{id}")
-    public Optional<Account> getOneAccount(@PathVariable(value = "id") Long accountId) {
-        return accountDao.getAccount(accountId);
+    public Account getOneAccount(@PathVariable(value = "id") Long accountId) throws IdNotFound {
+        return service.getAccountbyId(accountId);
     }
 
     @PostMapping("/CreateAccount")
     public void createAccount(@RequestBody Account account) {
-        accountDao.insertAccount(account);
+        service.CreateAccount(account);
 
     }
 
     @DeleteMapping("/DeleteAccount/{id}")
     public void deleteAccount(@PathVariable(value = "id") Long accountId) {
 
-        accountDao.deleteAccount(accountId);
+        service.deleteAccountbyId(accountId);
 
     }
 
 
     @PutMapping("/UpdateAccount/{id}")
     public void updateAccount(@PathVariable(value = "id") Long accountId, @RequestBody Account account) throws Exception{
-        accountDao.updateAccount(account, accountId);
+        service.updateAccountbyId(account, accountId);
 
     }
 

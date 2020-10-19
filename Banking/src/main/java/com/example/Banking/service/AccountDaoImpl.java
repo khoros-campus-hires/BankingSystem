@@ -1,4 +1,4 @@
-package com.example.Banking.dao;
+package com.example.Banking.service;
 import com.example.Banking.exception.IdNotFound;
 import com.example.Banking.model.Account;
 import com.example.Banking.repository.AccountRepository;
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class AccountDaoImpl implements AccountDao {
@@ -20,9 +19,11 @@ public class AccountDaoImpl implements AccountDao {
         return accountRepository.findAll();
     }
 
-    public Optional<Account> getAccount(long id) {
 
-        return accountRepository.findById(id);
+    public Account getAccount(long id) throws IdNotFound {
+
+            return accountRepository.findById(id).orElseThrow(() -> new IdNotFound("Account is not Found for this id"));
+
     }
 
     @Override
@@ -38,7 +39,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public void updateAccount(Account account, long AcNumber) throws IdNotFound {
-        Account accounts = accountRepository.findById(AcNumber).orElseThrow(() -> new IdNotFound("Id not Found"));
+        Account accounts = accountRepository.findById(AcNumber).orElseThrow(() -> new IdNotFound("Account is not Found for this id"));
         accounts.setAccountNumber(account.getAccountNumber());
         accounts.setAccountType(account.getAccountType());
         accounts.setBankName(account.getBankName());
