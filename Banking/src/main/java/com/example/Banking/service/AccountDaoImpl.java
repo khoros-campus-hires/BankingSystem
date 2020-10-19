@@ -2,7 +2,6 @@ package com.example.Banking.service;
 import com.example.Banking.exception.IdNotFound;
 import com.example.Banking.model.Account;
 import com.example.Banking.repository.AccountRepository;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,26 +13,27 @@ public class AccountDaoImpl implements AccountDao {
     @Autowired
     private AccountRepository accountRepository;
 
-
+    //To get all accounts
     @Override
     public List<Account> getAll() {
         return accountRepository.findAll();
     }
 
-
+    //To get account details using id
     public Account getAccount(long id) throws IdNotFound {
 
             return accountRepository.findById(id).orElseThrow(() -> new IdNotFound("Account is not Found for this id"));
 
     }
 
+    //To insert account
     @Override
     public void insertAccount(Account account) {
         accountRepository.save(account);
 
     }
-    //To delete account
 
+    //To delete account
     @Override
     public void deleteAccount(long id) throws IdNotFound{
         if(accountRepository.existsById(id)) {
@@ -44,6 +44,8 @@ public class AccountDaoImpl implements AccountDao {
             throw new IdNotFound("Account is not Found for this id");
         }
     }
+
+    //To update account using id
 
     @Override
     public void updateAccount(Account account, long AcNumber) throws IdNotFound {

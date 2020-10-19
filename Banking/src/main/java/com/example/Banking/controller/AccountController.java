@@ -40,6 +40,4 @@ public class AccountController {
         service.updateAccountbyId(account, accountId);
 
     }
-
-
 }
