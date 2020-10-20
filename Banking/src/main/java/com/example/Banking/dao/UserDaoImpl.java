@@ -21,8 +21,8 @@ public class UserDaoImpl  implements UserDao{
     private TransactionRepository transactionRepository;
 
     @Override
-    public Optional<Account> getAccount(long phoneNumber) {
-        return userRepository.findById(phoneNumber);
+    public Optional<Account> getAccount(long senderAccountNumber) {
+        return userRepository.findById(senderAccountNumber);
     }
 
 

@@ -13,9 +13,9 @@ public class UserController {
     @Autowired
     private Service service;
 
-    @PutMapping("/transaction/{phoneNumber}")
-    public String transactionService(@PathVariable(value = "phoneNumber") Long phoneNumber,@RequestBody UserTransaction sender) throws Exception {
-        return service.transaction(phoneNumber,sender);
+    @PutMapping("/transaction")
+    public String transactionService(@RequestBody UserTransaction sender) throws Exception {
+        return service.transaction(sender);
     }
 
 }

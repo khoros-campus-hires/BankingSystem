@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface UserDao {
 
-    Optional<Account> getAccount(long phoneNumber);
+    Optional<Account> getAccount(long senderAccountNumber);
     Account getAccountByAccountNumber ( long AccountNumber) throws IdNotFoundException;
     public void updateBalance( long sender_bal,Account sender) throws Exception;
     public void updateReceiverBalance(long receiverAmount, Account reciever ) throws Exception;

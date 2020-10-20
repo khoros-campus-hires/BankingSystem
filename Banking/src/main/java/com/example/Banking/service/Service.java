@@ -14,8 +14,8 @@ public class Service {
     private UserDao userDao;
 
 
-    public String transaction(Long phoneNumber, UserTransaction sender) throws Exception {
-        Account senderAcc = userDao.getAccount(phoneNumber).orElseThrow(() -> new IdNotFoundException("Sender Account is not found"));
+    public String transaction(UserTransaction sender) throws Exception {
+        Account senderAcc = userDao.getAccount(sender.getFromAccount()).orElseThrow(() -> new IdNotFoundException("Sender Account is not found"));
         Account recieverAcc = userDao.getAccountByAccountNumber(sender.getToAccount());
 
         if( senderAcc.getAccountNumber() == sender.getFromAccount() )
