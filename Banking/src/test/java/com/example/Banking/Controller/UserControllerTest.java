@@ -1,6 +1,7 @@
 package com.example.Banking.Controller;
 
 import com.example.Banking.Model.User;
+import com.example.Banking.Model.UserTranasaction;
 import com.example.Banking.service.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
@@ -50,6 +51,23 @@ class UserControllerTest {
 
         String expectedResponse = objectMapper.writeValueAsString(users);
         Assertions.assertThat(actualResponse).isEqualToIgnoringWhitespace(expectedResponse);
+    }
+
+
+    @Test
+    void transactionTest() throws Exception{
+        UserTranasaction userTranasactions  = new UserTranasaction( 24532459,24532457,1111);
+        Mockito.when(service.transaction((long) 454,userTranasactions)).thenReturn(String.valueOf(userTranasactions));
+
+        String url = "/Users/transaction/454";
+        RequestBuilder rb = MockMvcRequestBuilders.put(url).contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(userTranasactions));
+
+        MvcResult mvcResult = mockMvc.perform(rb).andReturn();
+
+        Assertions.assertThat(objectMapper.writeValueAsString(userTranasactions))
+                .isEqualToIgnoringWhitespace(mvcResult.getResponse().getContentAsString());
     }
 
 
