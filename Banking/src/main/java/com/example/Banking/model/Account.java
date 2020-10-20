@@ -22,7 +22,7 @@ public class Account
     private long accountBalance;
     private String ifscCode;
     private long cifNumber;
-    private long initialPayment;
+
 
 
 }
