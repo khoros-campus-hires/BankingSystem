@@ -52,10 +52,10 @@ public class AccountDaoImpl implements AccountDao {
         accounts.setAccountType(account.getAccountType());
         accounts.setBankName(account.getBankName());
         accounts.setBranchName(account.getBranchName());
+        accounts.setPhoneNumber(account.getPhoneNumber());
         accounts.setAccountBalance(account.getAccountBalance());
         accounts.setIfscCode(account.getIfscCode());
         accounts.setCifNumber(account.getCifNumber());
-        accounts.setInitialPayment(account.getInitialPayment());
         accountRepository.save(account);
 
     }
