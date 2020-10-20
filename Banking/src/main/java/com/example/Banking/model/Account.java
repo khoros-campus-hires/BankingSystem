@@ -16,7 +16,6 @@ public class Account
     private String accountType;
     private String bankName;
     private String branchName;
-    private long phoneNumber;
     private long accountBalance;
     private String ifscCode;
     private long cifNumber;

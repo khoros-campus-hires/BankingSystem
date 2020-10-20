@@ -13,7 +13,7 @@ public class AccountDaoImpl implements AccountDao {
     @Autowired
     private AccountRepository accountRepository;
 
-    String msg="Account is not Found for this ";
+   static String  ErrorMessage = "Account is not Found for this ";
 
     @Override
     public List<Account> getAll() {
@@ -23,7 +23,7 @@ public class AccountDaoImpl implements AccountDao {
 
     public Account getAccount(long acNumber) throws IdNotFoundException {
 
-            return accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(msg + " "+ acNumber));
+            return accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ErrorMessage + " "+ acNumber));
 
     }
 
@@ -41,18 +41,17 @@ public class AccountDaoImpl implements AccountDao {
         }
         else
         {
-            throw new IdNotFoundException(msg + " "+ acNumber);
+            throw new IdNotFoundException(ErrorMessage + " "+ acNumber);
         }
     }
 
     @Override
     public void updateAccount(Account account, long acNumber) throws IdNotFoundException {
-        Account accounts = accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(msg +" "+acNumber));
+        Account accounts = accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ErrorMessage +" "+acNumber));
         accounts.setAccountNumber(account.getAccountNumber());
         accounts.setAccountType(account.getAccountType());
         accounts.setBankName(account.getBankName());
         accounts.setBranchName(account.getBranchName());
-        accounts.setPhoneNumber(account.getPhoneNumber());
         accounts.setAccountBalance(account.getAccountBalance());
         accounts.setIfscCode(account.getIfscCode());
         accounts.setCifNumber(account.getCifNumber());
