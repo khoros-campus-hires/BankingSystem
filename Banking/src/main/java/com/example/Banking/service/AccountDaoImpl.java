@@ -1,5 +1,5 @@
 package com.example.Banking.service;
-import com.example.Banking.exception.IdNotFound;
+import com.example.Banking.exception.IdNotFoundException;
 import com.example.Banking.model.Account;
 import com.example.Banking.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,43 +13,41 @@ public class AccountDaoImpl implements AccountDao {
     @Autowired
     private AccountRepository accountRepository;
 
-    //To get all accounts
+    String msg="Account is not Found for this ";
+
     @Override
     public List<Account> getAll() {
         return accountRepository.findAll();
     }
 
-    //To get account details using id
-    public Account getAccount(long id) throws IdNotFound {
 
-            return accountRepository.findById(id).orElseThrow(() -> new IdNotFound("Account is not Found for this id"));
+    public Account getAccount(long acNumber) throws IdNotFoundException {
+
+            return accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(msg + " "+ acNumber));
 
     }
 
-    //To insert account
     @Override
     public void insertAccount(Account account) {
         accountRepository.save(account);
 
     }
 
-    //To delete account
+
     @Override
-    public void deleteAccount(long id) throws IdNotFound{
-        if(accountRepository.existsById(id)) {
-            accountRepository.deleteById(id);
+    public void deleteAccount(long acNumber) throws IdNotFoundException {
+        if(accountRepository.existsById(acNumber)) {
+            accountRepository.deleteById(acNumber);
         }
         else
         {
-            throw new IdNotFound("Account is not Found for this id");
+            throw new IdNotFoundException(msg + " "+ acNumber);
         }
     }
 
-    //To update account using id
-
     @Override
-    public void updateAccount(Account account, long AcNumber) throws IdNotFound {
-        Account accounts = accountRepository.findById(AcNumber).orElseThrow(() -> new IdNotFound("Account is not Found for this id"));
+    public void updateAccount(Account account, long acNumber) throws IdNotFoundException {
+        Account accounts = accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(msg +" "+acNumber));
         accounts.setAccountNumber(account.getAccountNumber());
         accounts.setAccountType(account.getAccountType());
         accounts.setBankName(account.getBankName());
@@ -58,7 +56,6 @@ public class AccountDaoImpl implements AccountDao {
         accounts.setIfscCode(account.getIfscCode());
         accounts.setCifNumber(account.getCifNumber());
         accounts.setInitialPayment(account.getInitialPayment());
-
         accountRepository.save(account);
 
     }

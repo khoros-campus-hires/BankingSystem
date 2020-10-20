@@ -1,14 +1,14 @@
 package com.example.Banking.service;
 
-import com.example.Banking.exception.IdNotFound;
+import com.example.Banking.exception.IdNotFoundException;
 import com.example.Banking.model.Account;
 import java.util.List;
 
 public interface AccountDao {
     public List<Account> getAll( );
-    Account getAccount(long id) throws IdNotFound;
+    Account getAccount(long acNumber) throws IdNotFoundException;
     void insertAccount(Account account);
-    void deleteAccount(long id) throws IdNotFound;
-    void updateAccount(Account account, long id) throws IdNotFound;
+    void deleteAccount(long acNumber) throws IdNotFoundException;
+    void updateAccount(Account account, long acNumber) throws IdNotFoundException;
 
 }

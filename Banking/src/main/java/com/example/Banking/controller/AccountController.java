@@ -1,43 +1,49 @@
 package com.example.Banking.controller;
-import com.example.Banking.exception.IdNotFound;
+import com.example.Banking.exception.IdNotFoundException;
 import com.example.Banking.model.Account;
-import com.example.Banking.service.Service;
+import com.example.Banking.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Accounts")
-
 public class AccountController {
     @Autowired
-    private Service service;
-    @GetMapping("/GetAllAccounts")
+    private AccountService accountService;
+    @GetMapping("/getAllAccounts")
     public List<Account> getAllAccounts() {
-        return service.getEveryAccount();
+        return accountService.getEveryAccount();
     }
 
-    @GetMapping("/GetOneAccount/{id}")
-    public Account getOneAccount(@PathVariable(value = "id") Long accountId) throws IdNotFound {
-        return service.getAccountbyId(accountId);
+    @GetMapping("/getOneAccount/{accountNumber}")
+    public Account getOneAccount(@PathVariable(value = "accountNumber") Long acNumber) throws IdNotFoundException {
+        return accountService.getAccountbyId(acNumber);
     }
 
-    @PostMapping("/CreateAccount")
-    public void createAccount(@RequestBody Account account) {
-        service.CreateAccount(account);
-
-    }
-
-    @DeleteMapping("/DeleteAccount/{id}")
-    public void deleteAccount(@PathVariable(value = "id") Long accountId) throws IdNotFound {
-
-        service.deleteAccountbyId(accountId);
+    @PostMapping("/createAccount")
+    public void createAccounts(@RequestBody Account account) {
+        accountService.createAccount(account);
 
     }
 
-    @PutMapping("/UpdateAccount/{id}")
-    public void updateAccount(@PathVariable(value = "id") Long accountId, @RequestBody Account account) throws IdNotFound{
-        service.updateAccountbyId(account, accountId);
+    @DeleteMapping("/deleteAccount/{accountNumber}")
+    public void deleteAccount(@PathVariable(value = "accountNumber") Long acNumber) throws IdNotFoundException {
+
+        accountService.deleteAccountbyId(acNumber);
+
+    }
+
+    @PutMapping("/updateAccount/{accountNumber}")
+    public void updateAccount(@PathVariable(value = "accountNumber") Long acNumber, @RequestBody Account account) throws IdNotFoundException {
+        accountService.updateAccountbyId(account, acNumber);
 
     }
 }
