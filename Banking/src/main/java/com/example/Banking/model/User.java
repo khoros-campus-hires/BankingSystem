@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "User")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,10 +21,9 @@ public class User {
     private long id;
     private String firstName;
     private String lastName;
-    private Date dob;
     private int age;
     private String address;
-    private long contact_number;
+    private String contact_number;
     private String email;
 
 
