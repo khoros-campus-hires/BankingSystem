@@ -1,12 +1,19 @@
-package com.example.Banking.Controller;
+package com.example.Banking.controller;
 
 import java.util.List;
 
 
-import com.example.Banking.Model.User;
-import com.example.Banking.Service.UserService;
+import com.example.Banking.model.User;
+import com.example.Banking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 
 @RestController
@@ -18,6 +25,7 @@ public class UserController {
 
     @GetMapping("/GetAllUsers")
     public List<User> getAllUsers() {
+
         return userService.getAll();
     }
 
@@ -29,6 +37,7 @@ public class UserController {
 
     @PostMapping("/CreateUser")
     public void createUser(@RequestBody User user) {
+
         userService.CreateUser(user);
 
     }
@@ -42,6 +51,7 @@ public class UserController {
 
     @PutMapping("/UpdateUser/{id}")
     public void updateEmployee(@PathVariable(value = "id") Long userId, @RequestBody User user) throws Exception {
+
         userService.updateUser(user, userId);
 
     }

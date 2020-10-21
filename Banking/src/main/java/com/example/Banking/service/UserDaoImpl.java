@@ -1,7 +1,7 @@
-package com.example.Banking.Service;
-import com.example.Banking.Exception.IdNotFound;
-import com.example.Banking.Model.User;
-import com.example.Banking.Repository.UserRepository;
+package com.example.Banking.service;
+import com.example.Banking.exception.IdNotFoundException;
+import com.example.Banking.model.User;
+import com.example.Banking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,31 +12,39 @@ public class UserDaoImpl implements UserDao {
 
     @Autowired
     UserRepository userRepository;
+
+    private static final String ERRORMESSAGE = "user not found for this id";
+
     @Override
     public List<User> getUsers() {
+
         return userRepository.findAll();
     }
 
-    public User getUser(long id) throws IdNotFound {
+    @Override
+    public User getUser(long id) throws IdNotFoundException {
 
         return userRepository.findById(id)
-                .orElseThrow(() -> new IdNotFound("User not found for this id :: " + id));
+                .orElseThrow(() -> new IdNotFoundException(ERRORMESSAGE+" : "+id));
     }
 
     @Override
     public void insertUser(User user)  {
+
         userRepository.save(user);
 
     }
 
     @Override
-    public void updateUser(User user, long id) throws IdNotFound {
+    public void updateUser(User user, long id) throws IdNotFoundException {
+
         User u = userRepository.findById(id)
-        .orElseThrow(() -> new IdNotFound("User not found for this id :: " + id));
+                .orElseThrow(() -> new IdNotFoundException(ERRORMESSAGE+" : "+id));
 
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
-        u.setAge(user.getAge());
+        u.setDob(user.getDob());
+        //u.setAge(user.getAge());
         u.setAddress(user.getAddress());
         u.setContact_number(user.getContact_number());
         u.setEmail(user.getEmail());
@@ -45,14 +53,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(long id) throws IdNotFound{
+    public void deleteUser(long id) throws IdNotFoundException{
 
         if(userRepository.existsById(id)) {
+
             userRepository.deleteById(id);
+
         }
         else
         {
-            throw new IdNotFound("Account is not Found for this id");
+            throw new IdNotFoundException(ERRORMESSAGE+" : "+id);
         }
 
 
