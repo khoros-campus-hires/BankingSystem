@@ -18,8 +18,7 @@ public class Account
     private long cifNumber;
 
 
-    //@ManyToOne
-    //private User user;
+
 
 }
     
