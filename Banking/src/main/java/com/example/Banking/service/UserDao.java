@@ -12,15 +12,10 @@ public interface UserDao  {
 
     User getUser(long id) throws IdNotFoundException;
 
-
     void insertUser(User user) ;
 
-
-    void updateUser(User user, long id) throws IdNotFoundException;
-
+    void updateUser(User user) throws IdNotFoundException;
 
     void deleteUser(long id) throws IdNotFoundException;
 
-
 }
-

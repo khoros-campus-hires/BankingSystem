@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao {
     public User getUser(long id) throws IdNotFoundException {
 
         return userRepository.findById(id)
-                .orElseThrow(() -> new IdNotFoundException(ERRORMESSAGE+" : "+id));
+                .orElseThrow(() -> new IdNotFoundException(ERRORMESSAGE + " : " + id));
     }
 
     @Override
@@ -36,10 +36,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(User user, long id) throws IdNotFoundException {
+    public void updateUser(User user) throws IdNotFoundException {
 
-        User u = userRepository.findById(id)
-                .orElseThrow(() -> new IdNotFoundException(ERRORMESSAGE+" : "+id));
+        User u = userRepository.findById(user.getId())
+                .orElseThrow(() -> new IdNotFoundException(ERRORMESSAGE + " : " + user.getId()));
 
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(long id) throws IdNotFoundException{
+    public void deleteUser(long id) throws IdNotFoundException {
 
         if(userRepository.existsById(id)) {
 
@@ -62,7 +62,7 @@ public class UserDaoImpl implements UserDao {
         }
         else
         {
-            throw new IdNotFoundException(ERRORMESSAGE+" : "+id);
+            throw new IdNotFoundException(ERRORMESSAGE + " : " + id);
         }
 
 

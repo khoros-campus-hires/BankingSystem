@@ -3,7 +3,6 @@ package com.example.Banking.service;
 import com.example.Banking.exception.IdNotFoundException;
 import com.example.Banking.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -13,28 +12,25 @@ public class UserService {
     private UserDaoImpl userDao;
 
     public List<User> getAll() {
-
         return userDao.getUsers();
     }
 
-    public User getUserbyId(Long Id) throws IdNotFoundException {
-
+    public User getUserById(Long Id) throws IdNotFoundException {
         return userDao.getUser(Id);
     }
 
-    public void CreateUser(User user) {
-
+    public void createUser(User user) {
         userDao.insertUser(user);
     }
 
     public void deleteUser(Long Id) throws IdNotFoundException {
-
         userDao.deleteUser(Id);
     }
 
-    public void updateUser(User user, Long Id) throws Exception{
-
-        userDao.updateUser(user,Id);
+    public void updateUser(User user) throws Exception{
+        userDao.updateUser(user);
     }
 }
+
+
 
