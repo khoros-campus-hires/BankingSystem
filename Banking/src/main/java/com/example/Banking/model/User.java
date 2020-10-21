@@ -21,7 +21,7 @@ public class User {
     private long id;
     private String firstName;
     private String lastName;
-    private int age;
+    private Date dob;
     private String address;
     private String contact_number;
     private String email;
