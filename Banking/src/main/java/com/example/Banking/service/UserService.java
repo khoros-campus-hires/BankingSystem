@@ -27,7 +27,7 @@ public class UserService {
         userDao.deleteUser(Id);
     }
 
-    public void updateUser(User user) throws Exception{
+    public void updateUser(User user) throws IdNotFoundException {
         userDao.updateUser(user);
     }
 }
