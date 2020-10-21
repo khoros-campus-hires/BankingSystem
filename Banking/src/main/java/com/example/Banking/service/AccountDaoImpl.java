@@ -13,7 +13,7 @@ public class AccountDaoImpl implements AccountDao {
     @Autowired
     private AccountRepository accountRepository;
 
-   static String  ErrorMessage = "Account is not Found for this ";
+   private static final String  ERROR_MESSAGE = "Account is not Found for this ";
 
     @Override
     public List<Account> getAll() {
@@ -23,7 +23,7 @@ public class AccountDaoImpl implements AccountDao {
 
     public Account getAccount(long acNumber) throws IdNotFoundException {
 
-            return accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ErrorMessage + " "+ acNumber));
+            return accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE + " "+ acNumber));
 
     }
 
@@ -41,13 +41,13 @@ public class AccountDaoImpl implements AccountDao {
         }
         else
         {
-            throw new IdNotFoundException(ErrorMessage + " "+ acNumber);
+            throw new IdNotFoundException(ERROR_MESSAGE+ " "+ acNumber);
         }
     }
 
     @Override
     public void updateAccount(Account account, long acNumber) throws IdNotFoundException {
-        Account accounts = accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ErrorMessage +" "+acNumber));
+        Account accounts = accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE +" "+acNumber));
         accounts.setAccountNumber(account.getAccountNumber());
         accounts.setAccountType(account.getAccountType());
         accounts.setBankName(account.getBankName());

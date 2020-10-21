@@ -1,8 +1,7 @@
 package com.example.Banking.model;
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "account_details")
@@ -19,6 +18,8 @@ public class Account
     private long accountBalance;
     private String ifscCode;
     private long cifNumber;
+
+
     
 
 
