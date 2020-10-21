@@ -9,6 +9,6 @@ public interface AccountDao {
     Account getAccount(long acNumber) throws IdNotFoundException;
     void insertAccount(Account account);
     void deleteAccount(long acNumber) throws IdNotFoundException;
-    void updateAccount(Account account, long acNumber) throws IdNotFoundException;
+    void updateAccount(Account account) throws IdNotFoundException;
 
 }

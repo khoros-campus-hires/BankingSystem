@@ -26,7 +26,7 @@ public class AccountService {
         accountDao.deleteAccount(acNumber);
     }
 
-    public void updateAccountbyId(Account account, Long acNumber) throws IdNotFoundException {
-        accountDao.updateAccount(account,acNumber);
+    public void updateAccountbyId(Account account) throws IdNotFoundException {
+        accountDao.updateAccount(account);
     }
 }

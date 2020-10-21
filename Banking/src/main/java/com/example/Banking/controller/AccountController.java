@@ -41,9 +41,9 @@ public class AccountController {
 
     }
 
-    @PutMapping("/updateAccount/{accountNumber}")
-    public void updateAccount(@PathVariable(value = "accountNumber") Long acNumber, @RequestBody Account account) throws IdNotFoundException {
-        accountService.updateAccountbyId(account, acNumber);
+    @PutMapping("/updateAccount")
+    public void updateAccount(@RequestBody Account account) throws IdNotFoundException {
+        accountService.updateAccountbyId(account);
 
     }
 }
