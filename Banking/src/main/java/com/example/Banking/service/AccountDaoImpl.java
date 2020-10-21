@@ -13,7 +13,7 @@ public class AccountDaoImpl implements AccountDao {
     @Autowired
     private AccountRepository accountRepository;
 
-    String msg="Account is not Found for this ";
+    private static final String  ERROR_MESSAGE = "Account is not Found for this ";
 
     @Override
     public List<Account> getAll() {
@@ -23,7 +23,7 @@ public class AccountDaoImpl implements AccountDao {
 
     public Account getAccount(long acNumber) throws IdNotFoundException {
 
-            return accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(msg + " "+ acNumber));
+        return accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE + " "+ acNumber));
 
     }
 
@@ -33,7 +33,6 @@ public class AccountDaoImpl implements AccountDao {
 
     }
 
-
     @Override
     public void deleteAccount(long acNumber) throws IdNotFoundException {
         if(accountRepository.existsById(acNumber)) {
@@ -41,21 +40,18 @@ public class AccountDaoImpl implements AccountDao {
         }
         else
         {
-            throw new IdNotFoundException(msg + " "+ acNumber);
+            throw new IdNotFoundException(ERROR_MESSAGE + " "+ acNumber);
         }
     }
 
     @Override
-    public void updateAccount(Account account, long acNumber) throws IdNotFoundException {
-        Account accounts = accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(msg +" "+acNumber));
-        accounts.setAccountNumber(account.getAccountNumber());
-        accounts.setAccountType(account.getAccountType());
-        accounts.setBankName(account.getBankName());
-        accounts.setBranchName(account.getBranchName());
-        accounts.setAccountBalance(account.getAccountBalance());
-        accounts.setIfscCode(account.getIfscCode());
-        accounts.setCifNumber(account.getCifNumber());
-        accounts.setInitialPayment(account.getInitialPayment());
+    public void updateAccount(Account account) throws IdNotFoundException {
+        Account accountsfromDB = accountRepository.findById(account.getAccountNumber()).orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE + " " + account.getAccountNumber()));
+        accountsfromDB.setAccountType(account.getAccountType());
+        accountsfromDB.setBranchName(account.getBranchName());
+        accountsfromDB.setAccountBalance(account.getAccountBalance());
+        accountsfromDB.setIfscCode(account.getIfscCode());
+        accountsfromDB.setCifNumber(account.getCifNumber());
         accountRepository.save(account);
 
     }
