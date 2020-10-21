@@ -4,6 +4,7 @@ import com.example.Banking.exception.IdNotFoundException;
 import com.example.Banking.model.Account;
 import java.util.List;
 
+
 public interface AccountDao {
     public List<Account> getAll( );
     Account getAccount(long acNumber) throws IdNotFoundException;
