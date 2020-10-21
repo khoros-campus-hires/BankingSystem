@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "transaction")
-public class UserTransaction {
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +21,13 @@ public class UserTransaction {
     private long fromAccount;
     private long toAccount;
     private long transferAmount;
+
+    @Enumerated(EnumType.STRING)
+    private State state = State.STARTED;
+
+    public enum State {
+        STARTED, FAILED, SUCCESSFUL
+    }
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

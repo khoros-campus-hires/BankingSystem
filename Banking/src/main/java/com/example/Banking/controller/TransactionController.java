@@ -1,17 +1,17 @@
 package com.example.Banking.controller;
 
-import com.example.Banking.model.UserTransaction;
-import com.example.Banking.service.Service;
+import com.example.Banking.model.Transaction;
+import com.example.Banking.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/Users")
-public class UserController {
+public class TransactionController {
 
     @Autowired
-    private Service service;
+    private TransactionService service;
 
     @PutMapping("/transaction")
     public String transactionService(@RequestBody UserTransaction sender) throws Exception {
