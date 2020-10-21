@@ -41,13 +41,13 @@ public class AccountDaoImpl implements AccountDao {
         }
         else
         {
-            throw new IdNotFoundException(ERROR_MESSAGE+ " "+ acNumber);
+            throw new IdNotFoundException(ERROR_MESSAGE + " "+ acNumber);
         }
     }
 
     @Override
     public void updateAccount(Account account, long acNumber) throws IdNotFoundException {
-        Account accounts = accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE +" "+acNumber));
+        Account accounts = accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE + " "+ acNumber));
         accounts.setAccountNumber(account.getAccountNumber());
         accounts.setAccountType(account.getAccountType());
         accounts.setBankName(account.getBankName());
