@@ -1,7 +1,7 @@
-package com.example.Banking.controller;
+package com.example.Banking.Controller;
 
-import com.example.Banking.model.Account;
-import com.example.Banking.service.Service;
+import com.example.Banking.Model.User;
+import com.example.Banking.Service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,42 +15,46 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
-@WebMvcTest(AccountController.class)
-class AccountControllerTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+
+@WebMvcTest(UserController.class)
+class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private Service service;
+    private UserService userService;
 
     @Autowired
     private ObjectMapper objectMapper;
 
     @Test
-    void getAllAccountDetails() throws Exception {
+    void getAllUsersTest() throws Exception {
+        List<User> users = new ArrayList<>();
+        users.add(new User(1212121212, "manas", "vini", 21, "10,chennai", 999999999, "m@mail.com"));
+        //users.add(new User(17,"vini"));
+        Mockito.when(userService.getAll()).thenReturn(users);
 
-        List<Account> accounts = new ArrayList<>();
-        accounts.add(new Account(1888888885,654565552,"Savings","IndianBank","Velur",5000,"IDIB000K078",322004562,0));
-        Mockito.when(service.getEveryAccount()).thenReturn(accounts);
-
-        String url = "/Accounts/GetAllAccounts";
+        /*String url = "/Users/getUsers";
+        MvcResult mvcResult = mockMvc.perform(get(url)).andExpect(status().isOk()).andReturn();
+        String actualJsonResponse = mvcResult.getResponse().getContentAsString();
+        System.out.println(actualJsonResponse);
+        String expectedResponse = objectMapper.writeValueAsString(users);
+        Assertions.assertThat(actualJsonResponse).isEqualToIgnoringWhitespace(expectedResponse);*/
+        String url = "/Users/GetAllUsers";
         RequestBuilder rb = MockMvcRequestBuilders.get(url).accept(MediaType.APPLICATION_JSON);
         MvcResult mvcResult = mockMvc.perform(rb).andReturn();
         String actualResponse = mvcResult.getResponse().getContentAsString();
 
         System.out.println(actualResponse);
 
-        String expectedResponse = objectMapper.writeValueAsString(accounts);
+        String expectedResponse = objectMapper.writeValueAsString(users);
         Assertions.assertThat(actualResponse).isEqualToIgnoringWhitespace(expectedResponse);
     }
-
-
-
 }
 
