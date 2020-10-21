@@ -13,7 +13,7 @@ public class AccountDaoImpl implements AccountDao {
     @Autowired
     private AccountRepository accountRepository;
 
-   private static final String  ERROR_MESSAGE = "Account is not Found for this ";
+    private static final String  ERROR_MESSAGE = "Account is not Found for this ";
 
     @Override
     public List<Account> getAll() {
