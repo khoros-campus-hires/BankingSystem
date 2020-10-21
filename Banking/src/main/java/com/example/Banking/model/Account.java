@@ -2,7 +2,6 @@ package com.example.Banking.model;
 import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
->>>>>>> account
 import javax.persistence.Table;
 import javax.persistence.Id;
 
