@@ -15,10 +15,6 @@ public class Account
 {
 
     @Id
-<<<<<<< HEAD
-=======
-    @GeneratedValue
->>>>>>> account
     private long accountNumber;
     private long id;
     private String accountType;
@@ -27,11 +23,7 @@ public class Account
     private long accountBalance;
     private String ifscCode;
     private long cifNumber;
-<<<<<<< HEAD
 
-=======
-    private long initialPayment;
->>>>>>> account
 
 
 }
