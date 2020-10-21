@@ -1,6 +1,10 @@
 package com.example.Banking.model;
 import lombok.Data;
 import javax.persistence.Entity;
+<<<<<<< HEAD
+=======
+import javax.persistence.GeneratedValue;
+>>>>>>> account
 import javax.persistence.Table;
 import javax.persistence.Id;
 
@@ -11,6 +15,10 @@ public class Account
 {
 
     @Id
+<<<<<<< HEAD
+=======
+    @GeneratedValue
+>>>>>>> account
     private long accountNumber;
     private long id;
     private String accountType;
@@ -19,7 +27,11 @@ public class Account
     private long accountBalance;
     private String ifscCode;
     private long cifNumber;
+<<<<<<< HEAD
 
+=======
+    private long initialPayment;
+>>>>>>> account
 
 
 }
