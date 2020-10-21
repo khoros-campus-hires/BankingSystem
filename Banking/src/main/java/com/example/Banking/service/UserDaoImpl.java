@@ -13,7 +13,7 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     UserRepository userRepository;
 
-    private static final String ERRORMESSAGE = "user not found for this id";
+    private static final String ERROR_MESSAGE = "user not found for this id";
 
     @Override
     public List<User> getUsers() {
@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao {
     public User getUser(long id) throws IdNotFoundException {
 
         return userRepository.findById(id)
-                .orElseThrow(() -> new IdNotFoundException(ERRORMESSAGE + " : " + id));
+                .orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE + " : " + id));
     }
 
     @Override
@@ -39,12 +39,11 @@ public class UserDaoImpl implements UserDao {
     public void updateUser(User user) throws IdNotFoundException {
 
         User u = userRepository.findById(user.getId())
-                .orElseThrow(() -> new IdNotFoundException(ERRORMESSAGE + " : " + user.getId()));
+                .orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE + " : " + user.getId()));
 
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
         u.setDob(user.getDob());
-        //u.setAge(user.getAge());
         u.setAddress(user.getAddress());
         u.setContact_number(user.getContact_number());
         u.setEmail(user.getEmail());
@@ -62,7 +61,7 @@ public class UserDaoImpl implements UserDao {
         }
         else
         {
-            throw new IdNotFoundException(ERRORMESSAGE + " : " + id);
+            throw new IdNotFoundException(ERROR_MESSAGE + " : " + id);
         }
 
 
