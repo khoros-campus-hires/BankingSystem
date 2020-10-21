@@ -1,4 +1,4 @@
-package com.example.Banking.dao;
+package com.example.Banking.service;
 
 import com.example.Banking.model.Transaction;
 import com.example.Banking.repository.TransactionRepository;
@@ -15,13 +15,13 @@ public class TransactionDaoImpl  implements TransactionDao{
     private TransactionRepository transactionRepository;
 
     @Override
-    public void insertTransactionTable(UserTransaction sender) {
-        transactionRepository.save(sender);
+    public void insertTransactionTable(Transaction transaction_details) {
+        transactionRepository.save(transaction_details);
     }
 
     @Override
-    public void updateTransactionTable(Transaction sender, Transaction.State state) {
-        sender.setState(state);
-        transactionRepository.save(sender);
+    public void updateTransactionTable(Transaction transaction_details, Transaction.State state) {
+        transaction_details.setState(state);
+        transactionRepository.save(transaction_details);
     }
 }

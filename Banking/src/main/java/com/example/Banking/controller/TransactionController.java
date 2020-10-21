@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/transaction")
 public class TransactionController {
 
     @Autowired
     private TransactionService service;
 
-    @PutMapping("/transaction")
-    public String transactionService(@RequestBody Transaction sender) throws Exception {
-        return service.transaction(sender);
+    @PutMapping("/payment")
+    public String transaction(@RequestBody Transaction transaction_details) throws Exception {
+        return service.transaction(transaction_details);
     }
 
 }

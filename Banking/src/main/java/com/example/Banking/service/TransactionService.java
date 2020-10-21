@@ -14,23 +14,23 @@ public class TransactionService {
     private AccountDao accountDao;
 
 
-    public String transaction(Transaction sender) throws Exception {
-        transactionDao.insertTransactionTable(sender);
-        Account senderAcc = accountDao.getAccount(sender.getFromAccount());
-        Account recieverAcc = accountDao.getAccount(sender.getToAccount());
+    public String transaction(Transaction transaction_details) throws Exception {
+        transactionDao.insertTransactionTable(transaction_details);
+        Account senderAcc = accountDao.getAccount(transaction_details.getFromAccount());
+        Account recieverAcc = accountDao.getAccount(transaction_details.getToAccount());
 
-        if( senderAcc.getAccountBalance() > sender.getTransferAmount()) {
-            senderAcc.setAccountBalance(senderAcc.getAccountBalance() - sender.getTransferAmount());
+        if( senderAcc.getAccountBalance() > transaction_details.getTransferAmount()) {
+            senderAcc.setAccountBalance(senderAcc.getAccountBalance() - transaction_details.getTransferAmount());
             accountDao.updateAccount(senderAcc);
-            transactionDao.updateTransactionTable(sender,Transaction.State.SUCCESSFUL);
+            transactionDao.updateTransactionTable(transaction_details,Transaction.State.SUCCESSFUL);
         }
 
         else {
-            transactionDao.updateTransactionTable(sender,Transaction.State.FAILED);
+            transactionDao.updateTransactionTable(transaction_details,Transaction.State.FAILED);
             return new TransactionStatus().returnMsg("Transaction Failed due to insufficient balance");
         }
 
-        recieverAcc.setAccountBalance(recieverAcc.getAccountBalance() + sender.getTransferAmount());
+        recieverAcc.setAccountBalance(recieverAcc.getAccountBalance() + transaction_details.getTransferAmount());
         accountDao.updateAccount(recieverAcc);
         return new TransactionStatus().returnMsg("Transaction Success");
     }
