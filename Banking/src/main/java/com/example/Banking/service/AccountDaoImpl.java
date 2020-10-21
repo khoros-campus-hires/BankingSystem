@@ -47,12 +47,12 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public void updateAccount(Account account) throws IdNotFoundException {
-        Account accounts = accountRepository.findById(account.getAccountNumber()).orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE + " " + account.getAccountNumber()));
-        accounts.setAccountType(account.getAccountType());
-        accounts.setBranchName(account.getBranchName());
-        accounts.setAccountBalance(account.getAccountBalance());
-        accounts.setIfscCode(account.getIfscCode());
-        accounts.setCifNumber(account.getCifNumber());
+        Account accountsfromDB = accountRepository.findById(account.getAccountNumber()).orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE + " " + account.getAccountNumber()));
+        accountsfromDB.setAccountType(account.getAccountType());
+        accountsfromDB.setBranchName(account.getBranchName());
+        accountsfromDB.setAccountBalance(account.getAccountBalance());
+        accountsfromDB.setIfscCode(account.getIfscCode());
+        accountsfromDB.setCifNumber(account.getCifNumber());
         accountRepository.save(account);
 
     }

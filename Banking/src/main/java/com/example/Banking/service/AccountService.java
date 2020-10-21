@@ -14,7 +14,7 @@ public class AccountService {
         return accountDao.getAll();
     }
 
-    public Account getAccountbyId(Long acNumber) throws IdNotFoundException {
+    public Account getAccountbyAcNumber(Long acNumber) throws IdNotFoundException {
         return accountDao.getAccount(acNumber);
     }
 
@@ -22,11 +22,11 @@ public class AccountService {
          accountDao.insertAccount(account);
     }
 
-    public void deleteAccountbyId(Long acNumber) throws IdNotFoundException {
+    public void deleteAccountbyAcNumber(Long acNumber) throws IdNotFoundException {
         accountDao.deleteAccount(acNumber);
     }
 
-    public void updateAccountbyId(Account account) throws IdNotFoundException {
+    public void updateAccount(Account account) throws IdNotFoundException {
         accountDao.updateAccount(account);
     }
 }

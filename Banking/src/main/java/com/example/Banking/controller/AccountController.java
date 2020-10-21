@@ -25,7 +25,7 @@ public class AccountController {
 
     @GetMapping("/getOneAccount/{accountNumber}")
     public Account getOneAccount(@PathVariable(value = "accountNumber") Long acNumber) throws IdNotFoundException {
-        return accountService.getAccountbyId(acNumber);
+        return accountService.getAccountbyAcNumber(acNumber);
     }
 
     @PostMapping("/createAccount")
@@ -37,13 +37,13 @@ public class AccountController {
     @DeleteMapping("/deleteAccount/{accountNumber}")
     public void deleteAccount(@PathVariable(value = "accountNumber") Long acNumber) throws IdNotFoundException {
 
-        accountService.deleteAccountbyId(acNumber);
+        accountService.deleteAccountbyAcNumber(acNumber);
 
     }
 
     @PutMapping("/updateAccount")
     public void updateAccount(@RequestBody Account account) throws IdNotFoundException {
-        accountService.updateAccountbyId(account);
+        accountService.updateAccount(account);
 
     }
 }

@@ -1,6 +1,5 @@
 package com.example.Banking.model;
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +10,6 @@ public class Account
 
     @Id
     private long accountNumber;
-    private long id;
     private String accountType;
     private String bankName;
     private String branchName;
@@ -20,7 +18,10 @@ public class Account
     private long cifNumber;
 
 
+    //@ManyToOne
+    //private User user;
+
+}
     
 
 
-}
