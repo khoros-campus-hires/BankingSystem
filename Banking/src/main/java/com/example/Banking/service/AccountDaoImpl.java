@@ -1,4 +1,5 @@
 package com.example.Banking.service;
+
 import com.example.Banking.exception.IdNotFoundException;
 import com.example.Banking.model.Account;
 import com.example.Banking.repository.AccountRepository;
@@ -13,7 +14,7 @@ public class AccountDaoImpl implements AccountDao {
     @Autowired
     private AccountRepository accountRepository;
 
-    private static final String  ERROR_MESSAGE = "Account is not Found for this ";
+    private static final String ERROR_MESSAGE = "Account is not Found for this ";
 
     @Override
     public List<Account> getAll() {
@@ -23,7 +24,7 @@ public class AccountDaoImpl implements AccountDao {
 
     public Account getAccount(long acNumber) throws IdNotFoundException {
 
-        return accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE + " "+ acNumber));
+        return accountRepository.findById(acNumber).orElseThrow(() -> new IdNotFoundException(ERROR_MESSAGE + " " + acNumber));
 
     }
 
@@ -35,12 +36,10 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public void deleteAccount(long acNumber) throws IdNotFoundException {
-        if(accountRepository.existsById(acNumber)) {
+        if (accountRepository.existsById(acNumber)) {
             accountRepository.deleteById(acNumber);
-        }
-        else
-        {
-            throw new IdNotFoundException(ERROR_MESSAGE + " "+ acNumber);
+        } else {
+            throw new IdNotFoundException(ERROR_MESSAGE + " " + acNumber);
         }
     }
 

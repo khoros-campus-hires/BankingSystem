@@ -1,4 +1,5 @@
 package com.example.Banking.controller;
+
 import com.example.Banking.exception.IdNotFoundException;
 import com.example.Banking.model.Account;
 import com.example.Banking.service.AccountService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
+
 import java.util.List;
 
 @RestController
@@ -18,6 +20,7 @@ import java.util.List;
 public class AccountController {
     @Autowired
     private AccountService accountService;
+
     @GetMapping("/getAllAccounts")
     public List<Account> getAllAccounts() {
         return accountService.getEveryAccount();

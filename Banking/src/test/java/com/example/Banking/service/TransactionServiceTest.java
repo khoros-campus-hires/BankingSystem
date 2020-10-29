@@ -48,7 +48,7 @@ class TransactionServiceTest {
         when(accountDao.getAccount(anyLong())).thenReturn(sender);
         Account senderAcc = accountDao.getAccount(234542213);
         assertEquals(234542213, senderAcc.getAccountNumber());
-        assertNotEquals(234542214,senderAcc.getAccountNumber());
+        assertNotEquals(234542214, senderAcc.getAccountNumber());
 
     }
 
@@ -56,7 +56,9 @@ class TransactionServiceTest {
     void transactionIdNotFoundExceptiontTest() throws IdNotFoundException {
         when(accountDao.getAccount(anyLong())).thenReturn(null);
         Account senderAcc = accountDao.getAccount(234542213);
-        assertThrows( NullPointerException.class, () -> { senderAcc.getAccountNumber(); } );
+        assertThrows(NullPointerException.class, () -> {
+            senderAcc.getAccountNumber();
+        });
     }
 
 

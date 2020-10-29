@@ -22,24 +22,29 @@ public class TransactionService {
     public String transaction(Transaction transaction_details) throws Exception {
         transactionDao.insertTransactionTable(transaction_details);
         Account senderAccCheck = null;
-        try{ senderAccCheck = accountDao.getAccount(transaction_details.getFromAccount()); }
-        catch (Exception e) { transactionDao.updateTransactionTable(transaction_details,Transaction.State.FAILED); }
+        try {
+            senderAccCheck = accountDao.getAccount(transaction_details.getFromAccount());
+        } catch (Exception e) {
+            transactionDao.updateTransactionTable(transaction_details, Transaction.State.FAILED);
+        }
         Account senderAcc = accountDao.getAccount(transaction_details.getFromAccount());
 
         Account receiverAccCheck = null;
-        try{ receiverAccCheck = accountDao.getAccount(transaction_details.getToAccount());}
-        catch (Exception e){ transactionDao.updateTransactionTable(transaction_details,Transaction.State.FAILED);}
+        try {
+            receiverAccCheck = accountDao.getAccount(transaction_details.getToAccount());
+        } catch (Exception e) {
+            transactionDao.updateTransactionTable(transaction_details, Transaction.State.FAILED);
+        }
         Account receiverAcc = accountDao.getAccount(transaction_details.getToAccount());
 
-        if( (senderAcc.getAccountBalance() > transaction_details.getTransferAmount()) ) {
+        if ((senderAcc.getAccountBalance() > transaction_details.getTransferAmount())) {
             long senderBalance = senderAcc.getAccountBalance() - transaction_details.getTransferAmount();
             long receiverBalance = receiverAcc.getAccountBalance() + transaction_details.getTransferAmount();
             accountRepository.updateBalance(senderBalance, senderAcc.getAccountNumber(), receiverBalance, receiverAcc.getAccountNumber());
-            transactionDao.updateTransactionTable(transaction_details,Transaction.State.SUCCESSFUL);
+            transactionDao.updateTransactionTable(transaction_details, Transaction.State.SUCCESSFUL);
             return new TransactionStatus().returnMsg("Transaction Success");
-        }
-        else {
-            transactionDao.updateTransactionTable(transaction_details,Transaction.State.FAILED);
+        } else {
+            transactionDao.updateTransactionTable(transaction_details, Transaction.State.FAILED);
             return new TransactionStatus().returnMsg("Transaction Failed due to insufficient balance");
         }
     }

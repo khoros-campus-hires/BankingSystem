@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class TransactionDaoImpl  implements TransactionDao{
+public class TransactionDaoImpl implements TransactionDao {
 
 
     @NonNull
@@ -20,8 +20,8 @@ public class TransactionDaoImpl  implements TransactionDao{
     }
 
     @Override
-    public void updateTransactionTable(Transaction transaction_details, Transaction.State state) {
-        transaction_details.setState(state);
-        transactionRepository.save(transaction_details);
+    public void updateTransactionTable(Transaction transactionDetails, Transaction.State state) {
+        transactionDetails.setState(state);
+        transactionRepository.save(transactionDetails);
     }
 }
