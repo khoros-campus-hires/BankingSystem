@@ -4,9 +4,12 @@ import com.example.Banking.model.Account;
 import com.example.Banking.model.Transaction;
 import com.example.Banking.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 
-@org.springframework.stereotype.Service
+@Service
 public class TransactionService {
 
     @Autowired

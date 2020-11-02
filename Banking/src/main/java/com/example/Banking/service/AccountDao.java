@@ -26,7 +26,6 @@ public interface AccountDao {
      */
     Account getAccount(long acNumber) throws IdNotFoundException;
 
-
     /**
      * insertAccount() Creates new user account
      *

@@ -2,16 +2,13 @@ package com.example.Banking.repository;
 
 import com.example.Banking.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    @Modifying
-    @Transactional
+
     @Query(value = "UPDATE account_details\n" +
             "   SET account_balance = CASE account_number \n" +
             "                      WHEN ?2 THEN ?1 \n" +

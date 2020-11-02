@@ -15,8 +15,8 @@ public class TransactionDaoImpl implements TransactionDao {
     private TransactionRepository transactionRepository;
 
     @Override
-    public void insertTransactionTable(Transaction transaction_details) {
-        transactionRepository.save(transaction_details);
+    public void insertTransactionTable(Transaction transactionDetails) {
+        transactionRepository.save(transactionDetails);
     }
 
     @Override
