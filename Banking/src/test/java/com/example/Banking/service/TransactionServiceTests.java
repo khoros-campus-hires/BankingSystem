@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class TransactionServiceTest {
+class TransactionServiceTests {
 
     @MockBean
     private AccountDao accountDao;
